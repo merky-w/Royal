@@ -504,9 +504,7 @@
         border-radius: 5px;
         font-family: "Montserrat", sans-serif;
         font-size: 1rem;
-        transition:
-          border-color 0.3s ease,
-          box-shadow 0.3s ease;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
       }
 
       .form-group input:focus,
@@ -536,15 +534,9 @@
         color: var(--black);
       }
 
-      .submit-btn:disabled {
-        background: #ccc;
-        cursor: not-allowed;
-        color: #666;
-      }
-
       /* Success Message Styling */
       .form-success-message {
-        display: none;
+        display: none; /* Alapból rejtve */
         text-align: center;
         padding: 2rem;
         background: #d4edda;
@@ -677,12 +669,8 @@
       }
 
       @keyframes fadeIn {
-        from {
-          opacity: 0;
-        }
-        to {
-          opacity: 1;
-        }
+        from { opacity: 0; }
+        to { opacity: 1; }
       }
 
       .fade-in {
@@ -774,8 +762,8 @@
             </p>
             <p>
               A jelenlegi épület 1911-ben épült Ede Magyar tervei alapján,
-              magyar szecessziós stílusban. 3 csillagos szállodánk 17 kényelmes
-              szobával várja a pihenni vágyókat.
+              magyar szecessziós stílusban. 3 csillagos szállodánk 17
+              kényelmes szobával várja a pihenni vágyókat.
             </p>
             <p>
               Kiváló elhelyezkedésünknek köszönhetően ideális kiindulópont
@@ -869,33 +857,22 @@
           <div class="service-item fade-in">
             <div class="service-icon">🅿️</div>
             <h3>Ingyenes Parkolás</h3>
-            <p>
-              Saját, biztonságos parkoló áll vendégeink rendelkezésére a
-              szálloda előtt.
-            </p>
+            <p>Saját, biztonságos parkoló áll vendégeink rendelkezésére a szálloda előtt.</p>
           </div>
           <div class="service-item fade-in">
             <div class="service-icon">📶</div>
             <h3>Gyors WiFi</h3>
-            <p>
-              Ingyenes, nagysebességű internet hozzáférés a teljes épületben.
-            </p>
+            <p>Ingyenes, nagysebességű internet hozzáférés a teljes épületben.</p>
           </div>
           <div class="service-item fade-in">
             <div class="service-icon">🍽️</div>
             <h3>Étterem</h3>
-            <p>
-              110 férőhelyes étteremünkben a szerb és magyar konyha remekei
-              várnak.
-            </p>
+            <p>110 férőhelyes étteremünkben a szerb és magyar konyha remekei várnak.</p>
           </div>
           <div class="service-item fade-in">
             <div class="service-icon">🕐</div>
             <h3>24 órás Recepció</h3>
-            <p>
-              Nap 24 órájában állunk rendelkezésére, hogy kellemesé tegyük
-              tartózkodását.
-            </p>
+            <p>Nap 24 órájában állunk rendelkezésére, hogy kellemesé tegyük tartózkodását.</p>
           </div>
         </div>
       </div>
@@ -936,27 +913,11 @@
             <span class="review-source">Agoda</span>
           </div>
         </div>
-        <div
-          style="
-            text-align: center;
-            margin-top: 3rem;
-            padding: 1.5rem;
-            background: #f4f4f4;
-            border-radius: 8px;
-          "
-        >
-          <p
-            style="
-              font-size: 1.2rem;
-              margin-bottom: 0.5rem;
-              color: var(--black);
-            "
-          >
+        <div style="text-align: center; margin-top: 3rem; padding: 1.5rem; background: #f4f4f4; border-radius: 8px;">
+          <p style="font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--black);">
             <strong>Összesített értékelés: 8.6/10</strong>
           </p>
-          <p style="color: var(--text-gray)">
-            90+ ellenőrzött vendégvélemény alapján (Booking.com)
-          </p>
+          <p style="color: var(--text-gray);">90+ ellenőrzött vendégvélemény alapján (Booking.com)</p>
         </div>
       </div>
     </section>
@@ -971,7 +932,7 @@
             <div class="contact-detail">
               <div>
                 <strong>Cím:</strong>
-                <p style="color: #555">
+                <p style="color: #555;">
                   Glavni trg 11<br />
                   24400 Senta (Zenta)<br />
                   Szerbia, Vajdaság
@@ -981,18 +942,18 @@
             <div class="contact-detail">
               <div>
                 <strong>Telefon:</strong>
-                <p style="color: #555">+381 (24) 812-368</p>
+                <p style="color: #555;">+381 (24) 812-368</p>
               </div>
             </div>
             <div class="contact-detail">
               <div>
                 <strong>Email:</strong>
-                <p style="color: #555">hotel@tisasenta.com</p>
+                <p style="color: #555;">hotel@tisasenta.com</p>
               </div>
             </div>
-
-            <div style="margin-top: 2.5rem">
-              <h4 style="margin-bottom: 1rem">Kövessen minket:</h4>
+            
+            <div style="margin-top: 2.5rem;">
+              <h4 style="margin-bottom: 1rem;">Kövessen minket:</h4>
               <div class="social-links">
                 <a href="#" title="Facebook">f</a>
                 <a href="#" title="Instagram">📷</a>
@@ -1003,37 +964,29 @@
 
           <!-- FORM START -->
           <div class="contact-form fade-in">
-            <!-- HIDDEN IFRAME - REMOVED ONLOAD ATTRIBUTE -->
-            <iframe name="hidden_iframe" style="display: none"></iframe>
-
-            <!-- Success Message (Hidden by default) -->
+            <!-- Success Message -->
             <div id="successMessage" class="form-success-message">
-              <div style="font-size: 3rem; margin-bottom: 1rem">🎉</div>
+              <div style="font-size: 3rem; margin-bottom: 1rem;">🎉</div>
               <h3>Köszönjük a foglalási kérelmet!</h3>
-              <p style="margin-bottom: 1.5rem">
+              <p style="margin-bottom: 1.5rem;">
                 Adatait sikeresen elküldtük. Kollégánk hamarosan felveszi Önnel
                 a kapcsolatot a megadott elérhetőségen.
               </p>
               <button
                 onclick="resetForm()"
                 class="cta-button"
-                style="
-                  background: #155724;
-                  border-color: #155724;
-                  color: white;
-                  font-size: 0.9rem;
-                "
+                style="background: #155724; border-color: #155724; color: white; font-size: 0.9rem;"
               >
                 Új foglalás indítása
               </button>
             </div>
 
             <!-- Booking Form -->
+            <!-- MEGJEGYZÉS: Nincs target="hidden_iframe", mert a _next paraméter kezeli a visszatérést -->
             <form
               id="bookingForm"
               action="https://formsubmit.co/gzolcsi2010@gmail.com"
               method="POST"
-              target="hidden_iframe"
             >
               <!-- FormSubmit Configuration -->
               <input type="hidden" name="_captcha" value="false" />
@@ -1043,7 +996,10 @@
                 value="🏨 Új foglalási kérelem - Royal Hotel Senta Weboldal"
               />
               <input type="hidden" name="_template" value="table" />
-
+              
+              <!-- Ez a sor a kulcs: Ha siker, visszairányít ide -->
+              <input type="hidden" name="_next" value="?success=true" />
+              
               <div class="form-group">
                 <label for="name">Teljes Név *</label>
                 <input
@@ -1054,7 +1010,7 @@
                   placeholder="Pl. Kovács János"
                 />
               </div>
-
+              
               <div class="form-group">
                 <label for="email">Email Cím *</label>
                 <input
@@ -1065,7 +1021,7 @@
                   placeholder="janos@pelda.com"
                 />
               </div>
-
+              
               <div class="form-group">
                 <label for="phone">Telefonszám</label>
                 <input
@@ -1076,9 +1032,7 @@
                 />
               </div>
 
-              <div
-                style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem"
-              >
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
                 <div class="form-group">
                   <label for="checkin">Érkezés *</label>
                   <input type="date" id="checkin" name="checkin" required />
@@ -1106,16 +1060,12 @@
                 <label for="room_type">Szoba típusa</label>
                 <select id="room_type" name="room_type">
                   <option value="Nem specifikált">-- Kérem válasszon --</option>
-                  <option value="Standard Egyágyas">
-                    Standard Egyágyas (€40)
-                  </option>
-                  <option value="Standard Kétágyas">
-                    Standard Kétágyas (€55)
-                  </option>
+                  <option value="Standard Egyágyas">Standard Egyágyas (€40)</option>
+                  <option value="Standard Kétágyas">Standard Kétágyas (€55)</option>
                   <option value="Deluxe Apartman">Deluxe Apartman (€80)</option>
                 </select>
               </div>
-
+              
               <div class="form-group">
                 <label for="message">Egyéb üzenet / Kérés</label>
                 <textarea
@@ -1125,8 +1075,8 @@
                   placeholder="Pl: Érkezésem későn lesz, vagy kérés erkélyes szoba..."
                 ></textarea>
               </div>
-
-              <button type="submit" class="submit-btn" id="submitBtn">
+              
+              <button type="submit" class="submit-btn">
                 Foglalási kérelem küldése
               </button>
             </form>
@@ -1187,13 +1137,13 @@
 
     <!-- JavaScript -->
     <script>
-      // --- Smooth Scrolling for Navigation ---
+      // --- 1. Smooth Scrolling for Navigation ---
       document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
         anchor.addEventListener("click", function (e) {
           e.preventDefault();
           const targetId = this.getAttribute("href");
-          if (targetId === "#") return;
-
+          if (targetId === '#') return;
+          
           const target = document.querySelector(targetId);
           if (target) {
             target.scrollIntoView({
@@ -1204,25 +1154,25 @@
         });
       });
 
-      // --- Mobile Menu Toggle ---
+      // --- 2. Mobile Menu Toggle ---
       function toggleMobileMenu() {
-        const nav = document.querySelector(".nav-links");
-        if (nav.style.display === "flex") {
-          nav.style.display = "none";
+        const nav = document.querySelector('.nav-links');
+        if (nav.style.display === 'flex') {
+          nav.style.display = 'none';
         } else {
-          nav.style.display = "flex";
-          nav.style.flexDirection = "column";
-          nav.style.position = "absolute";
-          nav.style.top = "70px";
-          nav.style.left = "0";
-          nav.style.width = "100%";
-          nav.style.background = "white";
-          nav.style.padding = "2rem";
-          nav.style.boxShadow = "0 5px 10px rgba(0,0,0,0.1)";
+          nav.style.display = 'flex';
+          nav.style.flexDirection = 'column';
+          nav.style.position = 'absolute';
+          nav.style.top = '70px';
+          nav.style.left = '0';
+          nav.style.width = '100%';
+          nav.style.background = 'white';
+          nav.style.padding = '2rem';
+          nav.style.boxShadow = '0 5px 10px rgba(0,0,0,0.1)';
         }
       }
 
-      // --- Intersection Observer for Scroll Animations ---
+      // --- 3. Intersection Observer for Scroll Animations ---
       const observerOptions = {
         threshold: 0.15,
         rootMargin: "0px 0px -50px 0px",
@@ -1241,85 +1191,36 @@
         observer.observe(el);
       });
 
-      // --- FIXED FORM SUBMISSION LOGIC ---
-
-      const form = document.getElementById("bookingForm");
-      const submitBtn = document.getElementById("submitBtn");
-      const successMsg = document.getElementById("successMessage");
-      const iframe = document.querySelector('iframe[name="hidden_iframe"]');
-
-      let isSubmitting = false; // Track if we are currently waiting for a response
-
-      // 1. Listen for the iframe load event
-      iframe.addEventListener("load", function () {
-        // This event fires when the iframe content changes (FormSubmit response)
-        if (isSubmitting) {
-          // Show success after a small delay to ensure visual smoothness
-          setTimeout(function () {
+      // --- 4. Check URL for Success (Redirect Method) ---
+      document.addEventListener("DOMContentLoaded", function() {
+        // Ellenőrizzük, hogy a URL-ben van-e a ?success=true
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('success')) {
+          // Ha igen, elrejtjük a formot és megjelenítjük a sikeres üzenetet
+          const form = document.getElementById("bookingForm");
+          const successMsg = document.getElementById("successMessage");
+          
+          if (form && successMsg) {
             form.style.display = "none";
             successMsg.style.display = "block";
-            successMsg.scrollIntoView({ behavior: "smooth", block: "center" });
-
-            // Reset button state
-            submitBtn.disabled = false;
-            submitBtn.innerText = "Foglalási kérelem küldése";
-            isSubmitting = false;
-          }, 1000);
-        }
-      });
-
-      // 2. Handle Form Submit
-      form.addEventListener("submit", function (e) {
-        e.preventDefault(); // Stop immediate page reload
-
-        // Check Validation
-        if (!form.checkValidity()) {
-          // If invalid, browser shows tooltips, and we exit here.
-          form.reportValidity();
-          return;
-        }
-
-        // If valid, start the process
-        isSubmitting = true;
-        const originalBtnText = submitBtn.innerText;
-        submitBtn.innerText = "Küldés folyamatban...";
-        submitBtn.disabled = true;
-        submitBtn.style.opacity = "0.7";
-
-        // Programmatically submit the form to the iframe
-        form.submit();
-
-        // Safety: Reset button if no response comes back in 15 seconds (fallback)
-        setTimeout(function () {
-          if (isSubmitting) {
-            alert(
-              "A küldés túl sokáig tartott. Kérjük ellenőrizze internetkapcsolatát.",
-            );
-            submitBtn.innerText = originalBtnText;
-            submitBtn.disabled = false;
-            submitBtn.style.opacity = "1";
-            isSubmitting = false;
+            // Görgetés a kontaktra
+            document.getElementById("contact").scrollIntoView({ behavior: 'smooth' });
           }
-        }, 15000);
+        }
       });
 
-      // --- Reset Form Function ---
+      // --- 5. Reset Form Function ---
       function resetForm() {
+        // Töröljük a URL-ből a ?success=true paramétert, hogy frissítéskor ne maradjon ott az üzenet
+        const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + window.location.hash;
+        window.history.pushState({path: newUrl}, '', newUrl);
+
         document.getElementById("bookingForm").reset();
         document.getElementById("successMessage").style.display = "none";
         document.getElementById("bookingForm").style.display = "block";
-
-        // Reset button state
-        submitBtn.disabled = false;
-        submitBtn.style.opacity = "1";
-        submitBtn.innerText = "Foglalási kérelem küldése";
-
-        // Reload iframe to reset its state
-        iframe.src = iframe.src;
-        isSubmitting = false;
       }
 
-      // --- Header Scroll Effect ---
+      // --- 6. Header Scroll Effect ---
       window.addEventListener("scroll", function () {
         const header = document.querySelector("header");
         if (window.scrollY > 50) {
@@ -1331,4 +1232,3 @@
     </script>
   </body>
 </html>
-
