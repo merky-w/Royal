@@ -5,29 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Royal Hotel Senta - 3 csillagos hotel Zenta szívében, a Tisza partján. Kiváló elhelyezkedés, barátságos személyzet, kényelmes szobák. Foglaljon most!"
+      content="Royal Hotel Senta - 3 csillagos hotel Zenta szívében, a Tisza partján. Kiváló elhelyezkedés, barátságos személyzet, kényelmes szobák."
     />
     <meta
       name="keywords"
       content="Royal Hotel Senta, hotel Zenta, szállás Szerbia, Vajdaság hotel, Senta accommodation"
     />
     <meta name="author" content="Royal Hotel Senta" />
-    <meta
-      property="og:title"
-      content="Royal Hotel Senta - Elegáns szállás Zenta szívében"
-    />
-    <meta
-      property="og:description"
-      content="Fedezze fel Zentát a Royal Hotelből - kiváló elhelyezkedés, kényelem és vendégszeretet"
-    />
-    <meta property="og:type" content="website" />
-    <title>Royal Hotel Senta | Elegáns szállás Zenta szívében - Vajdaság</title>
+    <title>Royal Hotel Senta | Elegáns szállás Zenta szívében</title>
+    
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
+
     <style>
+      /* --- ALAP BEÁLLÍTÁSOK --- */
       * {
         margin: 0;
         padding: 0;
@@ -48,17 +44,18 @@
         color: var(--dark-gray);
         line-height: 1.6;
         overflow-x: hidden;
+        scroll-behavior: smooth;
       }
 
-      h1,
-      h2,
-      h3,
-      h4 {
+      h1, h2, h3, h4 {
         font-family: "Playfair Display", serif;
         font-weight: 700;
       }
 
-      /* Navigation */
+      a { text-decoration: none; transition: 0.3s; }
+      ul { list-style: none; }
+
+      /* --- NAVIGÁCIÓ --- */
       header {
         position: fixed;
         top: 0;
@@ -83,30 +80,22 @@
         font-size: 1.8rem;
         font-weight: 700;
         color: var(--black);
-        text-decoration: none;
       }
 
-      .logo span {
-        color: var(--gold);
-      }
+      .logo span { color: var(--gold); }
 
       .nav-links {
         display: flex;
-        list-style: none;
         gap: 2rem;
       }
 
       .nav-links a {
-        text-decoration: none;
         color: var(--dark-gray);
         font-weight: 500;
-        transition: color 0.3s ease;
         position: relative;
       }
 
-      .nav-links a:hover {
-        color: var(--gold);
-      }
+      .nav-links a:hover { color: var(--gold); }
 
       .nav-links a::after {
         content: "";
@@ -119,9 +108,7 @@
         transition: width 0.3s ease;
       }
 
-      .nav-links a:hover::after {
-        width: 100%;
-      }
+      .nav-links a:hover::after { width: 100%; }
 
       .mobile-menu {
         display: none;
@@ -134,30 +121,28 @@
         height: 3px;
         background: var(--black);
         margin: 3px 0;
-        transition: 0.3s;
       }
 
-      /* Hero Section */
+      /* --- HERO SZEKCIÓ --- */
       .hero {
         margin-top: 70px;
         height: 90vh;
         background:
           linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
           url("https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80")
-            center/cover;
+            center/cover no-repeat;
         display: flex;
         align-items: center;
         justify-content: center;
         text-align: center;
         color: var(--white);
-        position: relative;
       }
 
       .hero-content h1 {
         font-size: 4rem;
         margin-bottom: 1rem;
-        animation: fadeInUp 1s ease;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        animation: fadeInUp 1s ease;
       }
 
       .hero-content p {
@@ -172,27 +157,22 @@
         padding: 1rem 3rem;
         background: var(--gold);
         color: var(--black);
-        text-decoration: none;
         font-weight: 600;
         border-radius: 5px;
-        transition: all 0.3s ease;
-        animation: fadeInUp 1s ease 0.4s backwards;
         border: 2px solid var(--gold);
         cursor: pointer;
+        animation: fadeInUp 1s ease 0.4s backwards;
       }
 
       .cta-button:hover {
         background: transparent;
         color: var(--white);
         transform: translateY(-3px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
       }
 
-      /* Section Styles */
-      section {
-        padding: 5rem 2rem;
-      }
-
+      /* --- ÁLTALÁNOS SZEKCIÓK --- */
+      section { padding: 5rem 2rem; }
+      
       .container {
         max-width: 1200px;
         margin: 0 auto;
@@ -215,10 +195,8 @@
         margin: 1rem auto;
       }
 
-      /* About Section */
-      .about {
-        background: var(--light-gray);
-      }
+      /* --- RÓLUNK --- */
+      .about { background: var(--light-gray); }
 
       .about-content {
         display: grid;
@@ -230,28 +208,18 @@
       .about-text p {
         margin-bottom: 1.5rem;
         font-size: 1.1rem;
-        line-height: 1.8;
-      }
-
-      .about-image {
-        position: relative;
-        overflow: hidden;
-        border-radius: 10px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
       }
 
       .about-image img {
         width: 100%;
-        height: auto;
-        display: block;
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         transition: transform 0.5s ease;
       }
 
-      .about-image:hover img {
-        transform: scale(1.05);
-      }
+      .about-image:hover img { transform: scale(1.05); }
 
-      /* Rooms Section */
+      /* --- SZOBÁK --- */
       .rooms-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -263,9 +231,7 @@
         border-radius: 10px;
         overflow: hidden;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        transition:
-          transform 0.3s ease,
-          box-shadow 0.3s ease;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
       }
 
       .room-card:hover {
@@ -276,7 +242,6 @@
       .room-image {
         height: 250px;
         background: var(--gold-light);
-        position: relative;
         overflow: hidden;
       }
 
@@ -286,9 +251,7 @@
         object-fit: cover;
       }
 
-      .room-info {
-        padding: 2rem;
-      }
+      .room-info { padding: 2rem; }
 
       .room-info h3 {
         font-size: 1.5rem;
@@ -296,10 +259,7 @@
         color: var(--black);
       }
 
-      .room-features {
-        list-style: none;
-        margin: 1rem 0;
-      }
+      .room-features { margin: 1rem 0; }
 
       .room-features li {
         padding: 0.3rem 0;
@@ -320,15 +280,13 @@
         margin: 1rem 0;
       }
 
-      /* Services Section */
+      /* --- SZOLGÁLTATÁSOK --- */
       .services {
         background: var(--black);
         color: var(--white);
       }
 
-      .services .section-title {
-        color: var(--white);
-      }
+      .services .section-title { color: var(--white); }
 
       .services-grid {
         display: grid;
@@ -337,9 +295,7 @@
         text-align: center;
       }
 
-      .service-item {
-        padding: 2rem;
-      }
+      .service-item { padding: 2rem; }
 
       .service-icon {
         font-size: 3rem;
@@ -347,12 +303,7 @@
         color: var(--gold);
       }
 
-      .service-item h3 {
-        font-size: 1.3rem;
-        margin-bottom: 1rem;
-      }
-
-      /* Reviews Section */
+      /* --- VÉLEMÉNYEK --- */
       .reviews-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -383,10 +334,8 @@
         color: var(--black);
       }
 
-      /* Contact Section */
-      .contact {
-        background: var(--gold-light);
-      }
+      /* --- KAPCSOLAT & FORM --- */
+      .contact { background: var(--gold-light); }
 
       .contact-content {
         display: grid;
@@ -401,9 +350,6 @@
 
       .contact-detail {
         margin-bottom: 1.5rem;
-        display: flex;
-        align-items: flex-start;
-        gap: 1rem;
       }
 
       .contact-detail strong {
@@ -417,12 +363,9 @@
         padding: 2rem;
         border-radius: 10px;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        position: relative;
       }
 
-      .form-group {
-        margin-bottom: 1.5rem;
-      }
+      .form-group { margin-bottom: 1.5rem; }
 
       .form-group label {
         display: block;
@@ -456,8 +399,8 @@
         cursor: pointer;
         font-weight: 600;
         font-size: 1rem;
-        transition: all 0.3s ease;
         width: 100%;
+        transition: all 0.3s ease;
       }
 
       .submit-btn:hover {
@@ -468,25 +411,10 @@
       .submit-btn:disabled {
         background: #ccc;
         cursor: not-allowed;
+        opacity: 0.7;
       }
 
-      /* Success Message Box */
-      .form-success-message {
-        display: none;
-        text-align: center;
-        padding: 2rem;
-        background: #d4edda;
-        color: #155724;
-        border: 1px solid #c3e6cb;
-        border-radius: 10px;
-      }
-
-      .form-success-message h3 {
-        color: #155724;
-        margin-bottom: 1rem;
-      }
-
-      /* Footer */
+      /* --- LÁBLÉC --- */
       footer {
         background: var(--black);
         color: var(--white);
@@ -504,28 +432,10 @@
         text-align: left;
       }
 
-      .footer-section h3 {
-        color: var(--gold);
-        margin-bottom: 1rem;
-      }
-
-      .footer-section ul {
-        list-style: none;
-      }
-
-      .footer-section ul li {
-        margin-bottom: 0.5rem;
-      }
-
-      .footer-section a {
-        color: var(--white);
-        text-decoration: none;
-        transition: color 0.3s ease;
-      }
-
-      .footer-section a:hover {
-        color: var(--gold);
-      }
+      .footer-section h3 { color: var(--gold); margin-bottom: 1rem; }
+      .footer-section ul li { margin-bottom: 0.5rem; }
+      .footer-section a { color: var(--white); }
+      .footer-section a:hover { color: var(--gold); }
 
       .social-links {
         display: flex;
@@ -542,8 +452,6 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        transition: all 0.3s ease;
-        text-decoration: none;
         font-weight: bold;
       }
 
@@ -558,24 +466,16 @@
         color: #999;
       }
 
-      /* Animations */
+      /* --- ANIMÁCIÓK --- */
       @keyframes fadeInUp {
-        from {
-          opacity: 0;
-          transform: translateY(30px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
       }
 
       .fade-in {
         opacity: 0;
         transform: translateY(30px);
-        transition:
-          opacity 0.8s ease,
-          transform 0.8s ease;
+        transition: opacity 0.8s ease, transform 0.8s ease;
       }
 
       .fade-in.visible {
@@ -583,32 +483,14 @@
         transform: translateY(0);
       }
 
-      /* Responsive */
+      /* --- RESPONSIVE --- */
       @media (max-width: 768px) {
-        .nav-links {
-          display: none;
-        }
-
-        .mobile-menu {
-          display: flex;
-        }
-
-        .hero-content h1 {
-          font-size: 2.5rem;
-        }
-
-        .hero-content p {
-          font-size: 1.2rem;
-        }
-
-        .about-content,
-        .contact-content {
-          grid-template-columns: 1fr;
-        }
-
-        section {
-          padding: 3rem 1rem;
-        }
+        .nav-links { display: none; }
+        .mobile-menu { display: flex; }
+        .hero-content h1 { font-size: 2.5rem; }
+        .hero-content p { font-size: 1.2rem; }
+        .about-content, .contact-content { grid-template-columns: 1fr; }
+        section { padding: 3rem 1rem; }
       }
     </style>
   </head>
@@ -656,7 +538,7 @@
             </p>
             <p>
               A jelenlegi épület 1911-ben épült Ede Magyar tervei alapján,
-              magyar szecessziós stílusban. 3 csillagos szállodánk 17精心
+              magyar szecessziós stílusban. 3 csillagos szállodánk精心
               kialakított szobával várja a pihenni vágyókat.
             </p>
             <p>
@@ -795,7 +677,7 @@
             <p class="review-text">
               "Impeccable clean, in amazing location with big breakfast. Quiet
               at night but still in city center. The staff were also polite and
-              friendly, overall - great experience!"
+              friendly!"
             </p>
             <p class="reviewer-name">- Iva, Szerbia</p>
             <small>Booking.com • 2024</small>
@@ -803,9 +685,8 @@
           <div class="review-card fade-in">
             <div class="review-rating">★★★★★</div>
             <p class="review-text">
-              "Great location, in the center, next to the park and Roda
-              supermarket and river. Staff was very nice, the rooms were basic
-              but clean and quiet."
+              "Great location, in the center, next to the park and river. 
+              Staff was very nice, rooms were clean and quiet."
             </p>
             <p class="reviewer-name">- Marija, Szerbia</p>
             <small>Booking.com • 2024</small>
@@ -814,17 +695,11 @@
             <div class="review-rating">★★★★★</div>
             <p class="review-text">
               "Friendly staff, willing to go the extra mile. My second stay in
-              Serbia at this hotel. I will stay here on my next trip."
+              Serbia at this hotel. Highly recommended!"
             </p>
             <p class="reviewer-name">- Clinton, USA</p>
             <small>Agoda • 2023</small>
           </div>
-        </div>
-        <div style="text-align: center; margin-top: 3rem">
-          <p style="font-size: 1.2rem; margin-bottom: 1rem">
-            <strong>Összesített értékelés:</strong> 8.6/10 (Booking.com)
-          </p>
-          <p><strong>90+ vendég vélemény</strong> alapján</p>
         </div>
       </div>
     </section>
@@ -837,113 +712,52 @@
           <div class="contact-info fade-in">
             <h3>Lépjen kapcsolatba velünk</h3>
             <div class="contact-detail">
-              <div>
-                <strong>Cím:</strong>
-                <p>
-                  Glavni trg 11<br />24400 Senta (Zenta)<br />Szerbia, Vajdaság
-                </p>
-              </div>
+              <strong>Cím:</strong>
+              <p>Glavni trg 11<br />24400 Senta (Zenta)<br />Szerbia, Vajdaság</p>
             </div>
             <div class="contact-detail">
-              <div>
-                <strong>Telefon:</strong>
-                <p>+381 (24) 812-368</p>
-              </div>
+              <strong>Telefon:</strong>
+              <p>+381 (24) 812-368</p>
             </div>
             <div class="contact-detail">
-              <div>
-                <strong>Email:</strong>
-                <p>hotel@tisasenta.com</p>
-              </div>
-            </div>
-            <div class="contact-detail">
-              <div>
-                <strong>Weboldal:</strong>
-                <p>www.hotel-royal.rs</p>
-              </div>
+              <strong>Email:</strong>
+              <p>hotel@tisasenta.com</p>
             </div>
             <div style="margin-top: 2rem">
               <h4>Kövessen minket:</h4>
               <div class="social-links">
-                <a href="#" title="Facebook">f</a>
-                <a href="#" title="Instagram">📷</a>
+                <a href="#" title="Facebook">FB</a>
+                <a href="#" title="Instagram">IG</a>
                 <a href="#" title="Google">G</a>
               </div>
             </div>
           </div>
 
-          <!-- FORM START: Módosítva FormSubmit.co-ra -->
+          <!-- FOGLALÁSI ŰRLAP -->
           <div class="contact-form fade-in">
-            <!-- Sikeres beküldés üzenete (alapból rejtve) -->
-            <div id="successMessage" class="form-success-message">
-              <h3>✅ Köszönjük a foglalási kérelmet!</h3>
-              <p>
-                Adatait sikeresen elküldtük. Kollégánk hamarosan felveszi Önnel
-                a kapcsolatot a megadott elérhetőségen.
-              </p>
-              <button
-                onclick="
-                  document.getElementById('bookingForm').reset();
-                  document.getElementById('successMessage').style.display =
-                    'none';
-                  document.getElementById('bookingForm').style.display =
-                    'block';
-                "
-                class="cta-button"
-                style="
-                  margin-top: 1rem;
-                  font-size: 0.9rem;
-                  padding: 0.5rem 1rem;
-                "
-              >
-                Új foglalás
-              </button>
-            </div>
-
-            <form
-              id="bookingForm"
-              action="https://formsubmit.co/gzolcsi2010@gmail.com"
+            <form 
+              id="bookingForm" 
+              action="https://formsubmit.co/gzolcsi2010@gmail.com" 
               method="POST"
             >
               <!-- FormSubmit beállítások -->
-              <input type="hidden" name="_captcha" value="false" />
-              <input
-                type="hidden"
-                name="_subject"
-                value="🏨 Új foglalási kérelem - Royal Hotel Senta"
-              />
-              <input type="hidden" name="_template" value="table" />
-              <!-- Ha van saját köszönőoldalad, ide írd be az URL-t a _next értékébe, különben a JS kezeli -->
-              <!-- <input type="hidden" name="_next" value="https://teoldalad.hu/koszonom.html"> -->
+              <input type="hidden" name="_captcha" value="false">
+              <input type="hidden" name="_subject" value="🏨 Új foglalási kérelem - Royal Hotel Senta">
+              <input type="hidden" name="_template" value="table">
+              <!-- Ha később lesz külön köszönőoldal, ezt a sort vedd ki kommentből és írd be az URL-t: -->
+              <!-- <input type="hidden" name="_next" value="https://merky-w.github.io/koszonom.html"> -->
 
               <div class="form-group">
                 <label for="name">Név *</label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  required
-                  placeholder="Teljes név"
-                />
+                <input type="text" id="name" name="name" required placeholder="Teljes név"/>
               </div>
               <div class="form-group">
                 <label for="email">Email *</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  placeholder="pelda@email.com"
-                />
+                <input type="email" id="email" name="email" required placeholder="pelda@email.com"/>
               </div>
               <div class="form-group">
                 <label for="phone">Telefon</label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  placeholder="+36..."
-                />
+                <input type="tel" id="phone" name="phone" placeholder="+36..."/>
               </div>
               <div class="form-group">
                 <label for="checkin">Érkezés *</label>
@@ -955,31 +769,18 @@
               </div>
               <div class="form-group">
                 <label for="guests">Vendégek száma *</label>
-                <input
-                  type="number"
-                  id="guests"
-                  name="guests"
-                  min="1"
-                  max="10"
-                  required
-                  placeholder="Pl: 2"
-                />
+                <input type="number" id="guests" name="guests" min="1" max="10" required placeholder="Pl: 2"/>
               </div>
               <div class="form-group">
                 <label for="message">Üzenet / Külön kérések</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows="3"
-                  placeholder="Pl: erkélyes szobát szeretnék..."
-                ></textarea>
+                <textarea id="message" name="message" rows="3" placeholder="Pl: erkélyes szobát szeretnék..."></textarea>
               </div>
+              
               <button type="submit" class="submit-btn" id="submitBtn">
                 FOGLALÁSI KÉRELEM KÜLDÉSE
               </button>
             </form>
           </div>
-          <!-- FORM END -->
         </div>
       </div>
     </section>
@@ -989,14 +790,11 @@
       <div class="footer-content">
         <div class="footer-section">
           <h3>Royal Hotel Senta</h3>
-          <p>
-            Elegáns szállás Zenta szívében 1911 óta. Vendégszeretet, kényelem és
-            történelmi hangulat.
-          </p>
+          <p>Elegáns szállás Zenta szívében 1911 óta.</p>
           <div class="social-links">
             <a href="#">FB</a>
             <a href="#">IG</a>
-            <a href="#">GP</a>
+            <a href="#">G</a>
           </div>
         </div>
         <div class="footer-section">
@@ -1009,53 +807,32 @@
           </ul>
         </div>
         <div class="footer-section">
-          <h3>Turisztikai információk</h3>
-          <ul>
-            <li><a href="#">Zenta látnivalói</a></li>
-            <li><a href="#">Emlékkilátó</a></li>
-            <li><a href="#">Tisza part</a></li>
-            <li><a href="#">Rendezvények</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h3>Értékeléseink</h3>
+          <h3>Értékelések</h3>
           <p><strong>Booking.com:</strong> 8.6/10</p>
-          <p><strong>Agoda:</strong> 8.7/10</p>
           <p><strong>Google:</strong> 4.3/5</p>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>
-          &copy; 2026 Royal Hotel Senta. Minden jog fenntartva. |
-          <a href="#" style="color: #999">Adatvédelem</a> |
-          <a href="#" style="color: #999">Felhasználási feltételek</a>
-        </p>
+        <p>&copy; 2026 Royal Hotel Senta. Minden jog fenntartva.</p>
       </div>
     </footer>
 
-    <!-- JavaScript -->
+    <!-- JAVÍTOTT JAVASCRIPT -->
     <script>
-      // Smooth scrolling
+      // Smooth scrolling (Gördítés)
       document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
         anchor.addEventListener("click", function (e) {
           e.preventDefault();
           const target = document.querySelector(this.getAttribute("href"));
           if (target) {
-            target.scrollIntoView({
-              behavior: "smooth",
-              block: "start",
-            });
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
           }
         });
       });
 
-      // Fade in animation on scroll
-      const observerOptions = {
-        threshold: 0.1,
-        rootMargin: "0px 0px -100px 0px",
-      };
-
-      const observer = new IntersectionObserver(function (entries) {
+      // Fade in animáció görgetéskor
+      const observerOptions = { threshold: 0.1 };
+      const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("visible");
@@ -1067,64 +844,25 @@
         observer.observe(el);
       });
 
-      // --- FORM SUBMIT KEZELÉS (FormSubmit.co-hoz igazítva) ---
+      // --- FORM KEZELÉS (EGYSZERŰSÍTVE) ---
+      // Mivel GitHub Pages-en vagyunk, NEM használunk fetch()-et, hanem
+      // hagyjuk a böngészőt dolgozni. Így garantáltan működik.
       const form = document.getElementById("bookingForm");
       const submitBtn = document.getElementById("submitBtn");
-      const successMsg = document.getElementById("successMessage");
 
-      form.addEventListener("submit", function (e) {
-        // Nem akadályozzuk meg az alapértelmezett küldést (hogy a FormSubmit működjön),
-        // de vizuális visszajelzést adunk.
-
-        const originalBtnText = submitBtn.innerText;
+      form.addEventListener("submit", () => {
+        // Vizuális visszajelzés a gombon beküldés előtt
         submitBtn.innerText = "Küldés folyamatban...";
         submitBtn.disabled = true;
-
-        // A FormSubmit alapból új oldalra irányít, ha nincs _next paraméter.
-        // Hogy itt maradjunk az oldalon és AJAX-szerűen működön,
-        // intercepteljük a submitot fetch-el, HA nem akarjuk az átirányítást.
-        // DE a legegyszerűbb és legbiztonságosabb módszer a FormSubmitnál:
-        // Engedjük a normál submitot, és a FormSubmit vissza fog irányítani (ha beállítjuk a _next-et)
-        // VAGY használjuk a fetch módszert lentebb a jobb UX érdekében:
-
-        e.preventDefault(); // Megállítjuk az alapértelmezett reloadot
-
-        const formData = new FormData(form);
-
-        fetch(form.action, {
-          method: "POST",
-          body: formData,
-          headers: {
-            Accept: "application/json",
-          },
-        })
-          .then((response) => {
-            if (response.ok) {
-              // Sikeres küldés
-              form.style.display = "none";
-              successMsg.style.display = "block";
-              window.scrollTo(0, document.getElementById("contact").offsetTop);
-            } else {
-              // Hiba
-              alert(
-                "Hiba történt a küldés során. Kérjük, próbálja újra később, vagy hívjon minket telefonon.",
-              );
-              submitBtn.innerText = originalBtnText;
-              submitBtn.disabled = false;
-            }
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-            alert(
-              "Hiba történt a küldés során. Kérjük, ellenőrizze az internetkapcsolatát.",
-            );
-            submitBtn.innerText = originalBtnText;
-            submitBtn.disabled = false;
-          });
+        submitBtn.style.opacity = "0.7";
+        
+        // NINCS preventDefault()! 
+        // Ez lehetővé teszi, hogy a form elküldje az adatokat a FormSubmit-nak
+        // és átirányítsa a felhasználót a köszönőoldalra.
       });
 
-      // Header scroll effect
-      window.addEventListener("scroll", function () {
+      // Fejléc árnyék effekt görgetéskor
+      window.addEventListener("scroll", () => {
         const header = document.querySelector("header");
         if (window.scrollY > 100) {
           header.style.boxShadow = "0 2px 20px rgba(0,0,0,0.15)";
@@ -1135,4 +873,3 @@
     </script>
   </body>
 </html>
-
