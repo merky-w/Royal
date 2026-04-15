@@ -2363,6 +2363,8 @@
             ? new Date(row.created_at).toLocaleDateString()
             : "-";
           const tr = document.createElement("tr");
+          
+          // FIX APPLIED HERE: Wrapped row.id in single quotes
           tr.innerHTML = `
             <td>${date}</td>
             <td><span style="background:var(--gold); color:black; padding:2px 8px; border-radius:4px; font-size:0.8rem; font-weight:bold;">${row.room_number || "N/A"}</span></td>
@@ -2373,7 +2375,7 @@
             <td>${row.guests}</td>
             <td><span class="status-badge ${row.statusClass}">${row.statusLabel}</span></td>
             <td>
-              <button class="btn-delete" onclick="deleteBooking(${row.id})">
+              <button class="btn-delete" onclick="deleteBooking('${row.id}')">
                 🗑️ Törlés
               </button>
             </td>
