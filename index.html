@@ -5,21 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Royal Hotel Senta - 3 csillagos hotel Zenta szívében, a Tisza partján. Kiváló elhelyezkedés, barátságos személyzet, kényelmes szobák. Foglaljon most!"
+      content="Royal Hotel Senta - 3 csillagos hotel Zenta szívében. Elegancia, kényelem és felejthetetlen élmények."
     />
-    <meta
-      name="keywords"
-      content="Royal Hotel Senta, hotel Zenta, szállás Szerbia, Vajdaság hotel, Senta accommodation"
-    />
-    <meta name="author" content="Royal Hotel Senta" />
-    <title>Royal Hotel Senta | Admin Panel & Booking</title>
+    <title>Royal Hotel Senta | Luxus Szállás Zentán</title>
 
-    <!-- Supabase Client Library (Included ONLY ONCE) -->
+    <!-- Supabase Client Library -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+    <!-- Flatpickr (Date Picker) CSS & JS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
     <style>
@@ -39,6 +42,9 @@
         --white: #ffffff;
         --light-gray: #f9f9f9;
         --text-gray: #666666;
+        --danger: #dc3545;
+        --success: #28a745;
+        --warning: #ffc107;
       }
 
       html {
@@ -59,6 +65,15 @@
       h4 {
         font-family: "Playfair Display", serif;
         font-weight: 700;
+        color: var(--black);
+      }
+
+      p {
+        margin-bottom: 1rem;
+      }
+
+      a {
+        text-decoration: none;
       }
 
       /* --- NAVIGATION --- */
@@ -67,8 +82,9 @@
         top: 0;
         width: 100%;
         background: rgba(255, 255, 255, 0.98);
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         z-index: 1000;
+        transition: all 0.3s ease;
       }
 
       nav {
@@ -85,7 +101,7 @@
         font-size: 1.8rem;
         font-weight: 700;
         color: var(--black);
-        text-decoration: none;
+        letter-spacing: -0.5px;
       }
       .logo span {
         color: var(--gold);
@@ -94,74 +110,137 @@
       .nav-links {
         display: flex;
         list-style: none;
-        gap: 2rem;
+        gap: 2.5rem;
       }
       .nav-links a {
         text-decoration: none;
         color: var(--dark-gray);
         font-weight: 500;
+        font-size: 0.95rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
         transition: color 0.3s;
+        position: relative;
+      }
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -5px;
+        left: 0;
+        background-color: var(--gold);
+        transition: width 0.3s;
+      }
+      .nav-links a:hover::after {
+        width: 100%;
       }
       .nav-links a:hover {
         color: var(--gold);
       }
 
+      .nav-cta {
+        background-color: var(--black);
+        color: white !important;
+        padding: 0.5rem 1.5rem;
+        border-radius: 4px;
+        transition: background 0.3s !important;
+      }
+      .nav-cta:hover {
+        background-color: var(--gold) !important;
+        color: var(--black) !important;
+      }
+      .nav-cta::after {
+        display: none;
+      }
+
       .mobile-menu {
         display: none;
         cursor: pointer;
+        flex-direction: column;
+        gap: 5px;
+        z-index: 1002;
       }
       .mobile-menu span {
         display: block;
         width: 25px;
-        height: 3px;
+        height: 2px;
         background: var(--black);
-        margin: 5px 0;
+        transition: 0.3s;
       }
 
       /* --- HERO --- */
       .hero {
-        margin-top: 70px;
-        height: 80vh;
+        margin-top: 80px;
+        height: 85vh;
+        min-height: 500px;
         background:
-          linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+          linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)),
           url("https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1920&q=80");
         background-size: cover;
         background-position: center;
+        background-attachment: fixed;
         display: flex;
         align-items: center;
         justify-content: center;
         color: white;
         text-align: center;
+        padding: 0 1rem;
       }
+
+      .hero-content {
+        max-width: 900px;
+        padding: 3rem 2rem;
+        background: rgba(0, 0, 0, 0.45);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        animation: fadeIn 1.5s ease-out;
+      }
+
       .hero-content h1 {
-        font-size: 3.5rem;
-        margin-bottom: 1rem;
+        font-size: 4rem;
+        margin-bottom: 1.5rem;
+        line-height: 1.1;
+        color: #ffffff;
+        text-shadow:
+          0 4px 15px rgba(0, 0, 0, 0.9),
+          0 0 2px rgba(0, 0, 0, 1);
+        letter-spacing: -1px;
       }
       .hero-content p {
-        font-size: 1.5rem;
-        margin-bottom: 2rem;
+        font-size: 1.4rem;
+        font-weight: 300;
+        margin-bottom: 2.5rem;
+        color: #f0f0f0;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
       }
 
       .cta-button {
         display: inline-block;
-        padding: 1rem 2rem;
+        padding: 1rem 2.5rem;
         background: var(--gold);
         color: var(--black);
         text-decoration: none;
-        border-radius: 5px;
-        font-weight: bold;
-        transition: 0.3s;
+        border-radius: 2px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.3s;
         cursor: pointer;
-        border: none;
+        border: 1px solid var(--gold);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
       }
       .cta-button:hover {
-        background: var(--gold-dark);
+        background: transparent;
         color: white;
+        border-color: white;
       }
 
-      /* --- SECTIONS --- */
+      /* --- GENERIC SECTIONS --- */
       section {
-        padding: 5rem 2rem;
+        padding: 6rem 2rem;
       }
       .container {
         max-width: 1200px;
@@ -170,74 +249,442 @@
       .section-title {
         text-align: center;
         font-size: 2.5rem;
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
         color: var(--black);
+        position: relative;
+        display: inline-block;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .section-title::after {
+        content: "";
+        display: block;
+        width: 60px;
+        height: 3px;
+        background: var(--gold);
+        margin: 1rem auto 0;
+      }
+      .section-subtitle {
+        text-align: center;
+        color: var(--text-gray);
+        max-width: 600px;
+        margin: 0 auto 4rem auto;
+        font-size: 1.1rem;
       }
 
-      /* --- FORM --- */
+      /* --- ABOUT SECTION --- */
+      #about {
+        background-color: var(--white);
+      }
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+      }
+      .about-text h3 {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+        color: var(--gold-dark);
+      }
+      .about-text p {
+        color: var(--text-gray);
+        margin-bottom: 1.5rem;
+        font-size: 1.05rem;
+      }
+      .about-image img {
+        width: 100%;
+        border-radius: 4px;
+        box-shadow: 20px 20px 0 var(--gold-light);
+      }
+
+      /* --- ROOMS SHOWCASE (MARKETING) --- */
+      #rooms-preview {
+        background-color: var(--light-gray);
+      }
+      .rooms-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+      .room-card {
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+      .room-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      }
+      .room-img-wrapper {
+        height: 250px;
+        overflow: hidden;
+        position: relative;
+      }
+      .room-img-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+      .room-card:hover .room-img-wrapper img {
+        transform: scale(1.1);
+      }
+      .room-content {
+        padding: 2rem;
+        text-align: center;
+      }
+      .room-content h3 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+      .room-content p {
+        color: var(--text-gray);
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
+      }
+      .room-price {
+        font-family: "Playfair Display", serif;
+        font-size: 1.2rem;
+        color: var(--gold-dark);
+        font-weight: bold;
+        margin-bottom: 1.5rem;
+        display: block;
+      }
+      .room-link {
+        font-size: 0.9rem;
+        color: var(--black);
+        text-transform: uppercase;
+        font-weight: 600;
+        border-bottom: 2px solid var(--gold);
+        padding-bottom: 2px;
+      }
+
+      /* --- SERVICES --- */
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+        text-align: center;
+      }
+      .service-item {
+        padding: 2rem;
+        background: white;
+        border: 1px solid #eee;
+        border-radius: 8px;
+        transition: 0.3s;
+      }
+      .service-item:hover {
+        border-color: var(--gold);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+      }
+      .service-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        display: block;
+      }
+      .service-item h4 {
+        margin-bottom: 0.5rem;
+        font-size: 1.1rem;
+      }
+      .service-item p {
+        font-size: 0.9rem;
+        color: var(--text-gray);
+        margin: 0;
+      }
+
+      /* --- IDEAS SECTION (AJÁNLÁSAINK) --- */
+      #ideas {
+        background-color: var(--white);
+      }
+      .ideas-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 2rem;
+        text-align: center;
+      }
+      .idea-card {
+        padding: 2rem;
+        border: 1px solid #eee;
+        border-radius: 8px;
+        background: var(--light-gray);
+        transition: 0.3s;
+      }
+      .idea-card:hover {
+        border-color: var(--gold);
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+      }
+      .idea-icon {
+        font-size: 2rem;
+        display: block;
+        margin-bottom: 1rem;
+      }
+
+      /* --- GALLERY --- */
+      #gallery {
+        padding-bottom: 2rem;
+      }
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
+      }
+      .gallery-item {
+        height: 250px;
+        overflow: hidden;
+        position: relative;
+      }
+      .gallery-item:nth-child(1) {
+        grid-column: span 2;
+        grid-row: span 2;
+        height: 506px;
+      }
+      .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+        filter: brightness(90%);
+      }
+      .gallery-item:hover img {
+        transform: scale(1.05);
+        filter: brightness(100%);
+      }
+
+      /* --- TESTIMONIALS --- */
+      #testimonials {
+        background-color: var(--black);
+        color: white;
+        text-align: center;
+      }
+      #testimonials .section-title {
+        color: white;
+      }
+      .testimonial-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 3rem;
+        margin-top: 3rem;
+      }
+      .testimonial-card {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 2.5rem;
+        border-radius: 8px;
+        border: 1px solid rgba(212, 175, 55, 0.3);
+      }
+      .stars {
+        color: var(--gold);
+        margin-bottom: 1.5rem;
+        letter-spacing: 2px;
+      }
+      .quote {
+        font-style: italic;
+        font-size: 1.1rem;
+        line-height: 1.8;
+        margin-bottom: 1.5rem;
+        color: #ddd;
+      }
+      .author {
+        font-family: "Playfair Display", serif;
+        font-weight: 700;
+        color: var(--gold);
+      }
+
+      /* --- BOOKING FORM SECTION --- */
+      #contact {
+        background-color: #f4f4f4;
+        border-top: 1px solid #eee;
+      }
+
       .contact-form {
-        max-width: 600px;
+        max-width: 800px;
         margin: 0 auto;
         background: white;
-        padding: 2rem;
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        padding: 3rem;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
         border-radius: 8px;
+        border-top: 5px solid var(--gold);
       }
+
       .form-group {
-        margin-bottom: 1rem;
+        margin-bottom: 1.5rem;
       }
       .form-group label {
         display: block;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.8rem;
         font-weight: 600;
+        color: var(--black);
+        font-size: 0.9rem;
+        text-transform: uppercase;
       }
       .form-group input,
       .form-group select,
       .form-group textarea {
         width: 100%;
-        padding: 10px;
+        padding: 14px;
         border: 1px solid #ddd;
         border-radius: 4px;
+        font-family: inherit;
+        font-size: 1rem;
+        transition: all 0.3s;
+        background: #fafafa;
       }
+      .form-group input:focus,
+      .form-group select:focus {
+        border-color: var(--gold);
+        outline: none;
+        background: white;
+        box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+      }
+
+      .room-selection-area {
+        background: #fcfcfc;
+        padding: 2rem;
+        border-radius: 8px;
+        border: 1px solid #eee;
+        margin-bottom: 2rem;
+      }
+
+      .status-message {
+        margin-top: 1rem;
+        padding: 1rem;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        display: none;
+      }
+      .status-message.info {
+        background-color: #e2e3e5;
+        color: #383d41;
+      }
+      .status-message.warning {
+        background-color: #fff3cd;
+        color: #856404;
+        border: 1px solid #ffeeba;
+      }
+      .status-message.error {
+        background-color: #f8d7da;
+        color: #721c24;
+      }
+      .status-message.success {
+        background-color: #d4edda;
+        color: #155724;
+      }
+
+      .suggestion-box {
+        margin-top: 1.5rem;
+        padding: 1.5rem;
+        background-color: var(--light-gray);
+        border-left: 5px solid var(--gold);
+        border-radius: 4px;
+        display: none;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      }
+      .suggestion-box h4 {
+        color: var(--gold-dark);
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+        text-transform: uppercase;
+      }
+      .suggestion-btn {
+        background: var(--white);
+        border: 1px solid var(--gold);
+        color: var(--gold-dark);
+        padding: 8px 16px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-weight: 600;
+        margin-top: 10px;
+        transition: all 0.2s;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .suggestion-btn:hover {
+        background: var(--gold);
+        color: white;
+      }
+
       .submit-btn {
         width: 100%;
-        padding: 1rem;
+        padding: 1.2rem;
         background: var(--black);
         color: white;
         border: none;
-        font-size: 1rem;
+        font-size: 1.1rem;
         cursor: pointer;
         font-weight: bold;
+        margin-top: 1rem;
+        transition: 0.3s;
+        text-transform: uppercase;
+        letter-spacing: 1px;
       }
       .submit-btn:hover {
         background: var(--gold);
+        color: var(--black);
+      }
+      .submit-btn:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+        color: #666;
       }
 
       /* --- ADMIN PANEL --- */
       .admin-section {
         background-color: #f0f2f5;
-        padding-top: 2rem;
+        padding-top: 4rem;
         padding-bottom: 4rem;
+        border-top: 1px solid #ddd;
       }
       .login-container {
         max-width: 400px;
         margin: 0 auto;
         text-align: center;
         background: white;
-        padding: 2rem;
+        padding: 2.5rem;
         border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
       }
-
       .admin-dashboard {
         display: none;
         background: white;
         padding: 2rem;
         border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        overflow-x: auto;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
       }
 
+      .admin-tabs {
+        display: flex;
+        border-bottom: 2px solid #eee;
+        margin-bottom: 2rem;
+      }
+      .tab-btn {
+        padding: 1rem 2rem;
+        background: none;
+        border: none;
+        font-size: 1rem;
+        font-weight: 600;
+        color: #888;
+        cursor: pointer;
+        border-bottom: 3px solid transparent;
+        transition: 0.3s;
+      }
+      .tab-btn:hover {
+        color: var(--black);
+      }
+      .tab-btn.active {
+        color: var(--black);
+        border-bottom-color: var(--gold);
+      }
+
+      .table-container {
+        overflow-x: auto;
+        margin-top: 1.5rem;
+      }
       .admin-table {
         width: 100%;
         border-collapse: collapse;
@@ -245,16 +692,172 @@
       }
       .admin-table th,
       .admin-table td {
-        padding: 12px;
-        border: 1px solid #ddd;
+        padding: 15px;
+        border-bottom: 1px solid #eee;
         text-align: left;
       }
       .admin-table th {
         background-color: var(--black);
         color: white;
+        font-weight: 500;
+        text-transform: uppercase;
+        font-size: 0.85rem;
       }
-      .admin-table tr:nth-child(even) {
+      .admin-table tr:hover {
         background-color: #f9f9f9;
+      }
+
+      /* Status Badges - NEW STYLES */
+      .status-badge {
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        display: inline-block;
+      }
+
+      /* Ma érkeznek - Priority 1 */
+      .status-arriving {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+      }
+
+      /* Jelenlegi - Priority 2 */
+      .status-active {
+        background-color: #d1ecf1;
+        color: #0c5460;
+        border: 1px solid #bee5eb;
+      }
+
+      /* Ma távoznak - Priority 3 */
+      .status-departing {
+        background-color: #fff3cd;
+        color: #856404;
+        border: 1px solid #ffeeba;
+      }
+
+      /* Múltbeli - Priority 4 */
+      .status-past {
+        background-color: #e2e3e5;
+        color: #383d41;
+        opacity: 0.7;
+        border: 1px solid #d6d8db;
+      }
+
+      /* Jövőbeli - Priority 5 */
+      .status-upcoming {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+      }
+
+      .legend-box {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        padding: 1rem;
+        background: #f8f9fa;
+        border: 1px solid #eee;
+        border-radius: 8px;
+        margin-bottom: 1.5rem;
+        align-items: center;
+        font-size: 0.85rem;
+      }
+      .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+      }
+
+      .btn-delete {
+        background-color: var(--danger);
+        color: white;
+        border: none;
+        padding: 6px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.85rem;
+        transition: background 0.2s;
+      }
+      .btn-delete:hover {
+        background-color: #c82333;
+      }
+
+      .add-room-inline {
+        background: var(--light-gray);
+        padding: 2rem;
+        border-radius: 8px;
+        margin-bottom: 2rem;
+        border: 1px solid #ddd;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 1.5rem;
+        align-items: end;
+      }
+      .add-room-inline h4 {
+        grid-column: 1 / -1;
+        margin-bottom: 0.5rem;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 0.5rem;
+      }
+
+      .filter-container {
+        margin-bottom: 1rem;
+      }
+      .filter-select {
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background-color: white;
+        font-family: "Montserrat", sans-serif;
+        font-size: 0.9rem;
+        cursor: pointer;
+      }
+
+      /* --- FOOTER --- */
+      footer {
+        background: var(--black);
+        color: #888;
+        padding: 4rem 2rem 2rem;
+        font-size: 0.9rem;
+      }
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 3rem;
+        margin-bottom: 3rem;
+      }
+      .footer-col h4 {
+        color: white;
+        margin-bottom: 1.5rem;
+        font-size: 1.2rem;
+      }
+      .footer-col ul {
+        list-style: none;
+      }
+      .footer-col ul li {
+        margin-bottom: 0.8rem;
+      }
+      .footer-col a {
+        color: #888;
+        transition: color 0.3s;
+      }
+      .footer-col a:hover {
+        color: var(--gold);
+      }
+      .footer-bottom {
+        text-align: center;
+        border-top: 1px solid #333;
+        padding-top: 2rem;
       }
 
       /* --- UTILS --- */
@@ -267,16 +870,119 @@
       .mt-4 {
         margin-top: 1.5rem;
       }
+      .price-tag {
+        font-size: 1.2rem;
+        color: var(--gold-dark);
+        font-weight: bold;
+        margin-top: 1rem;
+        display: block;
+        font-family: "Playfair Display", serif;
+      }
+
+      /* Flatpickr Overwrites */
+      .flatpickr-calendar {
+        border: 1px solid var(--gold);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        font-family: "Montserrat", sans-serif;
+      }
+      .flatpickr-day.selected,
+      .flatpickr-day.startRange,
+      .flatpickr-day.endRange {
+        background: var(--gold);
+        border-color: var(--gold);
+      }
+      .flatpickr-day:hover {
+        background: var(--gold-light);
+      }
+      span.flatpickr-weekday {
+        color: var(--gold-dark);
+      }
+
+      /* Spinner */
+      .spinner {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid rgba(0, 0, 0, 0.1);
+        border-radius: 50%;
+        border-top-color: var(--gold);
+        animation: spin 1s ease-in-out infinite;
+        margin-left: 10px;
+        vertical-align: middle;
+        display: none;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* --- RESPONSIVE --- */
+      @media (max-width: 900px) {
+        .gallery-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .gallery-item:nth-child(1) {
+          grid-column: span 2;
+          height: 300px;
+        }
+        .about-grid {
+          grid-template-columns: 1fr;
+        }
+      }
 
       @media (max-width: 768px) {
         .nav-links {
           display: none;
         }
         .mobile-menu {
-          display: block;
+          display: flex;
         }
         .hero-content h1 {
           font-size: 2.5rem;
+        }
+        .hero-content p {
+          font-size: 1.1rem;
+        }
+        .hero-content {
+          width: 90%;
+          padding: 2rem 1.5rem;
+        }
+        .add-room-inline {
+          grid-template-columns: 1fr;
+        }
+        .contact-form {
+          padding: 1.5rem;
+        }
+        .section-title {
+          font-size: 2rem;
+        }
+        .legend-box {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .filter-container {
+          width: 100%;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .hero-content h1 {
+          font-size: 2rem;
+        }
+        .cta-button {
+          padding: 0.8rem 1.5rem;
+          font-size: 0.9rem;
         }
       }
     </style>
@@ -286,7 +992,10 @@
       <nav>
         <a href="#" class="logo">ROYAL <span>HOTEL</span></a>
         <ul class="nav-links">
-          <li><a href="#contact">Foglalás</a></li>
+          <li><a href="#about">Rólunk</a></li>
+          <li><a href="#rooms-preview">Szobák</a></li>
+          <li><a href="#services">Szolgáltatások</a></li>
+          <li><a href="#contact" class="nav-cta">Foglalás</a></li>
           <li><a href="#admin">Admin</a></li>
         </ul>
         <div class="mobile-menu" onclick="toggleMenu()">
@@ -299,80 +1008,446 @@
     <section class="hero">
       <div class="hero-content">
         <h1>Royal Hotel Senta</h1>
-        <p>Foglaljon egyszerűen és gyorsan</p>
-        <a href="#contact" class="cta-button">Foglalás indítása</a>
+        <p>
+          A klasszikus elegancia találkozása a modern kényelemmel a város
+          szívében.
+        </p>
+        <a href="#contact" class="cta-button">Foglaljon most</a>
       </div>
     </section>
 
-    <!-- Booking Form -->
+    <!-- About Section -->
+    <section id="about">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-text">
+            <h2
+              class="section-title"
+              style="margin-left: 0; left: 0; transform: none; text-align: left"
+            >
+              Üdvözöljük a Royalban
+            </h2>
+            <h3>Élmény, ami otthonra emlékeztet</h3>
+            <p>
+              A Royal Hotel Senta több mint egy szálláshely – egy menedék a
+              nyüzsgésben. Hisszük, hogy a valódi luxus a részletekben rejlik: a
+              csendes szobákban, a prémium ágyneműben, és abban a személyes
+              figyelemben, amit minden vendégünk kap.
+            </p>
+            <p>
+              Akár üzleti úton jár, akár családi kikapcsolódásra vágyik,
+              csapatunk itt van, hogy felejthetetlenné tegye az Ön
+              tartózkodását. Fedezze fel Zenta kultúráját, majd térjen vissza a
+              hotel nyugalmába.
+            </p>
+            <a
+              href="#rooms-preview"
+              style="
+                color: var(--gold-dark);
+                font-weight: 600;
+                border-bottom: 1px solid var(--gold-dark);
+              "
+              >Ismerje meg szobáinkat &rarr;</a
+            >
+          </div>
+          <div class="about-image">
+            <img
+              src="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80"
+              alt="Hotel Interior"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Rooms Showcase -->
+    <section id="rooms-preview">
+      <div class="container">
+        <h2 class="section-title">Szobáink</h2>
+        <p class="section-subtitle">
+          Minden szoba egyedi stílussal és maximális kényelemmel várja
+          vendégeinket.
+        </p>
+
+        <div class="rooms-grid">
+          <!-- Standard -->
+          <div class="room-card">
+            <div class="room-img-wrapper">
+              <img
+                src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=600&q=80"
+                alt="Standard Room"
+              />
+            </div>
+            <div class="room-content">
+              <h3>Standard Szoba</h3>
+              <p>
+                Tökéletes választás üzleti utazóknak. Kényelmes franciaággyal,
+                íróasztallal és modern fürdőszobával.
+              </p>
+              <span class="room-price">50 EUR / éj</span>
+              <a
+                href="#contact"
+                onclick="prefillRoom('Standard')"
+                class="room-link"
+                >Foglalás</a
+              >
+            </div>
+          </div>
+
+          <!-- Deluxe -->
+          <div class="room-card">
+            <div class="room-img-wrapper">
+              <img
+                src="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=600&q=80"
+                alt="Deluxe Room"
+              />
+            </div>
+            <div class="room-content">
+              <h3>Deluxe Szoba</h3>
+              <p>
+                Tágasabb tér, extra kényelem és kilátás a városra. Ideális
+                pároknak, akik a pihenést keresik.
+              </p>
+              <span class="room-price">75 EUR / éj</span>
+              <a
+                href="#contact"
+                onclick="prefillRoom('Deluxe')"
+                class="room-link"
+                >Foglalás</a
+              >
+            </div>
+          </div>
+
+          <!-- Suite -->
+          <div class="room-card">
+            <div class="room-img-wrapper">
+              <img
+                src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80"
+                alt="Suite"
+              />
+            </div>
+            <div class="room-content">
+              <h3>Royal Suite</h3>
+              <p>
+                A csúcskategóriás élmény. Külön nappali, jakuzzi, terasz és
+                concierge szolgáltatás.
+              </p>
+              <span class="room-price">120 EUR / éj</span>
+              <a
+                href="#contact"
+                onclick="prefillRoom('Suite')"
+                class="room-link"
+                >Foglalás</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services">
+      <div class="container">
+        <h2 class="section-title">Szolgáltatásaink</h2>
+        <div class="services-grid">
+          <div class="service-item">
+            <span class="service-icon">📶</span>
+            <h4>Ingyenes WiFi</h4>
+            <p>Large sávszélességű internet a teljes épületben.</p>
+          </div>
+          <div class="service-item">
+            <span class="service-icon">🍳</span>
+            <h4>Büfé Reggeli</h4>
+            <p>Helyi és nemzetközi finomságok minden reggel 7-10 óráig.</p>
+          </div>
+          <div class="service-item">
+            <span class="service-icon">🅿️</span>
+            <h4>Felszíni Parkoló</h4>
+            <p>Biztosított, megfigyelt parkoló vendégeink számára.</p>
+          </div>
+          <div class="service-item">
+            <span class="service-icon">🛎️</span>
+            <h4>24/7 Recepció</h4>
+            <p>Csapatunk éjjel-nappal az Ön rendelkezésére áll.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ideas / Suggestions Section -->
+    <section id="ideas">
+      <div class="container">
+        <h2 class="section-title">Ajánlásaink</h2>
+        <p class="section-subtitle">
+          Válogatott ötletek, hogy a tartózkodása még különlegesebb legyen.
+        </p>
+
+        <div class="ideas-grid">
+          <div class="idea-card">
+            <span class="idea-icon">❤️</span>
+            <h4>Romantikus hétvége</h4>
+            <p>Deluxe szoba + reggeli + késői kijelentkezés pároknak.</p>
+          </div>
+
+          <div class="idea-card">
+            <span class="idea-icon">💼</span>
+            <h4>Üzleti csomag</h4>
+            <p>
+              Gyors WiFi, csendes szoba és korai check-in üzleti vendégeknek.
+            </p>
+          </div>
+
+          <div class="idea-card">
+            <span class="idea-icon">👨‍👩‍👧</span>
+            <h4>Családi pihenés</h4>
+            <p>
+              Tágas szobák és több férőhely a kényelmes családi
+              kikapcsolódáshoz.
+            </p>
+          </div>
+
+          <div class="idea-card">
+            <span class="idea-icon">🍷</span>
+            <h4>Luxus élmény</h4>
+            <p>Royal Suite + extra szolgáltatások a maximális kényelemért.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <section id="gallery">
+      <div class="container" style="padding: 0">
+        <h2 class="section-title" style="margin-bottom: 3rem">Galéria</h2>
+        <div class="gallery-grid">
+          <div class="gallery-item">
+            <img
+              src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=800&q=80"
+              alt="Lobby"
+            />
+          </div>
+          <div class="gallery-item">
+            <img
+              src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=600&q=80"
+              alt="Restaurant"
+            />
+          </div>
+          <div class="gallery-item">
+            <img
+              src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=600&q=80"
+              alt="Exterior"
+            />
+          </div>
+          <div class="gallery-item">
+            <img
+              src="https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=600&q=80"
+              alt="Bathroom"
+            />
+          </div>
+          <div class="gallery-item">
+            <img
+              src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=600&q=80"
+              alt="Bed"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials">
+      <div class="container">
+        <h2 class="section-title">Vendégeink mondták</h2>
+        <div class="testimonial-grid">
+          <div class="testimonial-card">
+            <div class="stars">⭐⭐⭐⭐⭐</div>
+            <p class="quote">
+              "Hihetetlenül tiszta szobák és a személyzet fantasztikusan
+              készséges volt. A reggeli pedig a koronázása volt a napnak!"
+            </p>
+            <p class="author">- Anna Kovács</p>
+          </div>
+          <div class="testimonial-card">
+            <div class="stars">⭐⭐⭐⭐⭐</div>
+            <p class="quote">
+              "Tökéletes helyszín egy hétvégi kiruccanáshoz. A Deluxe szoba
+              tágas és világos. Mindenkinek ajánlom."
+            </p>
+            <p class="author">- Péter Nagy</p>
+          </div>
+          <div class="testimonial-card">
+            <div class="stars">⭐⭐⭐⭐⭐</div>
+            <p class="quote">
+              "Sokat utazunk, de kevés olyan hotelt láttunk, ahol ennyire
+              figyelnek a részletekre. Biztosan visszatérünk."
+            </p>
+            <p class="author">- Michael Weber</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Booking Form Section -->
     <section id="contact">
       <div class="container">
-        <h2 class="section-title">Új Foglalás</h2>
+        <h2 class="section-title">Foglalás</h2>
+        <p class="section-subtitle">
+          Töltse ki az űrlapot a szabad szobák ellenőrzéséhez és az azonnali
+          foglaláshoz.
+        </p>
+
         <div class="contact-form">
+          <!-- Success Message -->
           <div
             id="successMsg"
             class="hidden"
             style="
               background: #d4edda;
               color: #155724;
-              padding: 1rem;
+              padding: 2rem;
               border-radius: 5px;
               text-align: center;
             "
           >
-            <h3>Sikeres foglalás!</h3>
-            <p>Köszönjük, adatait elmentettük.</p>
+            <h3 style="color: #155724; margin-bottom: 0.5rem">
+              Sikeres foglalás!
+            </h3>
+            <p>Köszönjük, adatait elmentettük. Várjuk szeretettel!</p>
             <button
               class="cta-button mt-4"
               onclick="resetForm()"
-              style="font-size: 0.8rem"
+              style="font-size: 0.9rem; padding: 0.8rem 1.5rem"
             >
-              Új foglalás
+              Új foglalás indítása
             </button>
           </div>
 
           <form id="bookingForm">
+            <!-- Step 1: Criteria -->
+            <div class="room-selection-area">
+              <div class="form-group">
+                <label>Dátumok kiválasztása</label>
+                <div
+                  style="
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 1rem;
+                  "
+                >
+                  <div>
+                    <label
+                      style="
+                        font-size: 0.8rem;
+                        font-weight: normal;
+                        color: #666;
+                      "
+                      >Érkezés</label
+                    >
+                    <input
+                      type="text"
+                      id="checkin"
+                      name="checkin"
+                      required
+                      placeholder="Válasszon..."
+                      readonly
+                    />
+                  </div>
+                  <div>
+                    <label
+                      style="
+                        font-size: 0.8rem;
+                        font-weight: normal;
+                        color: #666;
+                      "
+                      >Távozás</label
+                    >
+                    <input
+                      type="text"
+                      id="checkout"
+                      name="checkout"
+                      required
+                      placeholder="Válasszon..."
+                      readonly
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Vendégek száma</label>
+                <input
+                  type="number"
+                  id="guests"
+                  name="guests"
+                  min="1"
+                  max="10"
+                  required
+                  placeholder="Pl. 2"
+                />
+                <div id="searchFeedback" class="spinner"></div>
+                <div id="statusMessage" class="status-message info">
+                  Kérem töltse ki a dátumokat és a vendégek számát a szobák
+                  betöltéséhez.
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 2: Room Selection (Dynamic) -->
             <div class="form-group">
-              <label>Név</label>
+              <label>Szoba választás</label>
+              <select id="roomSelect" name="room_number" required disabled>
+                <option value="" selected>
+                  Először válasszon dátumot és vendégszámot...
+                </option>
+              </select>
+              <div id="roomPriceDisplay" class="price-tag"></div>
+
+              <!-- Smart Suggestion Box -->
+              <div id="suggestionBox" class="suggestion-box">
+                <h4>💡 Javaslatunk</h4>
+                <p id="suggestionText"></p>
+                <button id="suggestionBtn" class="suggestion-btn">
+                  Elfogadom ezt a szobát
+                </button>
+              </div>
+            </div>
+
+            <hr style="border: 0; border-top: 1px solid #eee; margin: 2rem 0" />
+
+            <!-- Step 3: Contact Info -->
+            <div class="form-group">
+              <label>Teljes név</label>
               <input
                 type="text"
                 id="name"
                 name="name"
                 required
-                placeholder="Teljes név"
+                placeholder="Pl. Kiss János"
               />
             </div>
             <div class="form-group">
-              <label>Email</label>
+              <label>Email cím</label>
               <input
                 type="email"
                 id="email"
                 name="email"
                 required
-                placeholder="pelda@email.com"
+                placeholder="janos@pelda.com"
               />
             </div>
             <div class="form-group">
               <label>Telefonszám</label>
-              <input type="tel" id="phone" name="phone" placeholder="+36..." />
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                placeholder="+36 30 123 4567"
+              />
             </div>
-            <div
-              style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem"
-            >
-              <div class="form-group">
-                <label>Érkezés</label>
-                <input type="date" id="checkin" name="checkin" required />
-              </div>
-              <div class="form-group">
-                <label>Távozás</label>
-                <input type="date" id="checkout" name="checkout" required />
-              </div>
-            </div>
-            <div class="form-group">
-              <label>Vendégek száma</label>
-              <input type="number" id="guests" name="guests" min="1" required />
-            </div>
-            <button type="submit" class="submit-btn">Mentés</button>
+
+            <button type="submit" id="submitBtn" class="submit-btn" disabled>
+              Foglalás véglegesítése
+            </button>
           </form>
         </div>
       </div>
@@ -385,13 +1460,18 @@
 
         <!-- Login View -->
         <div id="adminLogin" class="login-container">
-          <p>Admin belépés</p>
+          <p style="margin-bottom: 1rem">Csak személyzetnek</p>
           <input
             type="password"
             id="adminCode"
-            class="form-group"
-            style="width: 100%; padding: 10px; margin-bottom: 10px"
-            placeholder="Kód (1234)"
+            placeholder="Belépési kód (1234)"
+            style="
+              width: 100%;
+              padding: 12px;
+              margin-bottom: 1rem;
+              border: 1px solid #ccc;
+              border-radius: 4px;
+            "
           />
           <button onclick="loginAdmin()" class="cta-button" style="width: 100%">
             Belépés
@@ -405,205 +1485,939 @@
               display: flex;
               justify-content: space-between;
               align-items: center;
-              margin-bottom: 1rem;
+              margin-bottom: 2rem;
             "
           >
-            <h3>Beérkező foglalások</h3>
+            <h3>Kezelőközpont</h3>
             <button
               onclick="logoutAdmin()"
               style="
-                background: #888;
+                background: #666;
                 color: white;
                 border: none;
-                padding: 5px 15px;
+                padding: 8px 16px;
                 cursor: pointer;
                 border-radius: 4px;
+                font-size: 0.9rem;
               "
             >
               Kilépés
             </button>
           </div>
 
-          <div style="overflow-x: auto">
-            <table class="admin-table">
-              <thead>
-                <tr>
-                  <th>Dátum</th>
-                  <th>Név</th>
-                  <th>Email</th>
-                  <th>Telefon</th>
-                  <th>Érkezés</th>
-                  <th>Távozás</th>
-                  <th>Vendégek</th>
-                </tr>
-              </thead>
-              <tbody id="bookingsTableBody">
-                <!-- JS populates this -->
-              </tbody>
-            </table>
+          <!-- Tabs -->
+          <div class="admin-tabs">
+            <button class="tab-btn active" onclick="switchTab('bookings')">
+              Foglalások
+            </button>
+            <button class="tab-btn" onclick="switchTab('rooms')">
+              Szobák Kezelése
+            </button>
           </div>
-          <p
-            id="noData"
-            class="text-center hidden"
-            style="padding: 1rem; color: #666"
-          >
-            Nincsenek foglalások.
-          </p>
+
+          <!-- CONTENT: BOOKINGS -->
+          <div id="tab-bookings" class="tab-content">
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 10px;
+              "
+            >
+              <h4>Beérkező és jelenlegi foglalások</h4>
+
+              <!-- FILTER DROPDOWN -->
+              <div class="filter-container">
+                <select id="bookingFilter" class="filter-select">
+                  <option value="Mind">Mind (Összes)</option>
+                  <option value="Ma érkeznek">Ma érkeznek</option>
+                  <option value="Jelenlegi">Jelenlegi (Itt vannak)</option>
+                  <option value="Ma távoznak">Ma távoznak</option>
+                  <option value="Múltbeli">Múltbeli (Kijelentkeztek)</option>
+                  <option value="Jövőbeli">Jövőbeli (Még nem érkeztek)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Status Legend -->
+            <div class="legend-box">
+              <strong>Státusz Jelmagyarázat:</strong>
+              <div class="legend-item">
+                <span
+                  class="dot"
+                  style="background: #d4edda; border: 1px solid #c3e6cb"
+                ></span>
+                <span>Ma érkeznek</span>
+              </div>
+              <div class="legend-item">
+                <span
+                  class="dot"
+                  style="background: #d1ecf1; border: 1px solid #bee5eb"
+                ></span>
+                <span>Jelenlegi (Itt vannak)</span>
+              </div>
+              <div class="legend-item">
+                <span
+                  class="dot"
+                  style="background: #fff3cd; border: 1px solid #ffeeba"
+                ></span>
+                <span>Ma távoznak</span>
+              </div>
+              <div class="legend-item">
+                <span
+                  class="dot"
+                  style="background: #e2e3e5; border: 1px solid #d6d8db"
+                ></span>
+                <span>Múltbeli</span>
+              </div>
+              <div class="legend-item">
+                <span
+                  class="dot"
+                  style="background: #f8d7da; border: 1px solid #f5c6cb"
+                ></span>
+                <span>Jövőbeli</span>
+              </div>
+            </div>
+
+            <div class="table-container">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Dátum</th>
+                    <th>Szoba</th>
+                    <th>Név</th>
+                    <th>Email</th>
+                    <th>Érkezés</th>
+                    <th>Távozás</th>
+                    <th>Vendégek</th>
+                    <th>Státusz</th>
+                    <th>Műveletek</th>
+                  </tr>
+                </thead>
+                <tbody id="bookingsTableBody">
+                  <!-- JS populates this -->
+                </tbody>
+              </table>
+            </div>
+            <p
+              id="noBookings"
+              class="text-center hidden"
+              style="
+                padding: 2rem;
+                color: #666;
+                background: #f9f9f9;
+                margin-top: 1rem;
+              "
+            >
+              Nincsenek megfelelő foglalások.
+            </p>
+          </div>
+
+          <!-- CONTENT: ROOMS -->
+          <div id="tab-rooms" class="tab-content hidden">
+            <!-- Add New Room Form -->
+            <form id="addRoomForm" class="add-room-inline">
+              <h4>Új Szoba Hozzáadása</h4>
+
+              <div class="form-group" style="margin-bottom: 0">
+                <label>Szobaszám</label>
+                <input
+                  type="text"
+                  id="newRoomNumber"
+                  required
+                  placeholder="pl. 101"
+                />
+              </div>
+
+              <div class="form-group" style="margin-bottom: 0">
+                <label>Típus</label>
+                <select id="newRoomType" required>
+                  <option value="Standard">Standard</option>
+                  <option value="Standard Plus">Standard Plus</option>
+                  <option value="Deluxe">Deluxe</option>
+                  <option value="Suite">Suite</option>
+                  <option value="Apartment">Apartment</option>
+                </select>
+              </div>
+
+              <div class="form-group" style="margin-bottom: 0">
+                <label>Férőhely</label>
+                <input
+                  type="number"
+                  id="newRoomCapacity"
+                  required
+                  min="1"
+                  max="10"
+                  placeholder="2"
+                />
+              </div>
+
+              <div class="form-group" style="margin-bottom: 0">
+                <label>Ár / Éj (EUR)</label>
+                <input
+                  type="number"
+                  id="newRoomPrice"
+                  required
+                  min="0"
+                  step="0.01"
+                  placeholder="50.00"
+                />
+              </div>
+
+              <button
+                type="submit"
+                class="cta-button"
+                style="padding: 12px 20px"
+              >
+                Hozzáad
+              </button>
+            </form>
+
+            <h4>Meglévő Szobák</h4>
+            <div class="table-container">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Szobaszám</th>
+                    <th>Típus</th>
+                    <th>Férőhely</th>
+                    <th>Ár / Éj</th>
+                    <th>Létrehozva</th>
+                    <th>Műveletek</th>
+                  </tr>
+                </thead>
+                <tbody id="roomsTableBody">
+                  <!-- JS populates this -->
+                </tbody>
+              </table>
+            </div>
+            <p
+              id="noRooms"
+              class="text-center hidden"
+              style="
+                padding: 2rem;
+                color: #666;
+                background: #f9f9f9;
+                margin-top: 1rem;
+              "
+            >
+              Nincsenek szobák rögzítve az adatbázisban.
+            </p>
+          </div>
         </div>
       </div>
     </section>
 
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <div class="footer-col">
+          <h4>Royal Hotel Senta</h4>
+          <p>A város szívében, ahol a luxus otthonos találkozik.</p>
+          <p>📍 Zenta, Fő utca 123.</p>
+          <p>📞 +36 30 123 4567</p>
+        </div>
+        <div class="footer-col">
+          <h4>Gyorslinkek</h4>
+          <ul>
+            <li><a href="#about">Rólunk</a></li>
+            <li><a href="#rooms-preview">Szobák</a></li>
+            <li><a href="#services">Szolgáltatások</a></li>
+            <li><a href="#contact">Kapcsolat</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Információk</h4>
+          <ul>
+            <li><a href="#">Házirend</a></li>
+            <li><a href="#">Adatvédelem</a></li>
+            <li><a href="#">Karrier</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Royal Hotel Senta. Minden jog fenntartva.</p>
+      </div>
+    </footer>
+
     <!-- JavaScript -->
     <script>
       // ==========================================
-      // ⚠️ IMPORTANT: HOW TO RUN THIS FILE
+      // CONFIGURATION
       // ==========================================
-      // If you see "Unsafe attempt to load URL file://..." in the console,
-      // it means you double-clicked the HTML file.
-      //
-      // FIX: Use a Local Server.
-      // 1. Install "Live Server" extension in VS Code.
-      // 2. Right-click this file -> "Open with Live Server".
-      // ==========================================
-
-      // 1. CONFIGURATION
-      // REPLACE THESE WITH YOUR ACTUAL SUPABASE KEYS
       const SUPABASE_URL = "https://cziwnycosdxeuacslcza.supabase.co";
       const SUPABASE_ANON_KEY =
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN6aXdueWNvc2R4ZXVhY3NsY3phIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjY3MTkxMDAsImV4cCI6MjA4MjI5NTEwMH0.7OvfatHP7RAp6JS1F5hMlwfdSDgpN7EXsY2SVMoFSoY";
 
-      // 2. INIT CLIENT (Renamed to supabaseClient to avoid 'already declared' errors)
+      // Initialize Client
       const supabaseClient = window.supabase.createClient(
         SUPABASE_URL,
         SUPABASE_ANON_KEY,
       );
 
-      // 3. ADMIN CONFIG
       const ADMIN_CODE = "1234";
 
       // DOM Elements
-      const form = document.getElementById("bookingForm");
-      const adminLogin = document.getElementById("adminLogin");
-      const adminPanel = document.getElementById("adminPanel");
-      const tableBody = document.getElementById("bookingsTableBody");
+      const bookingForm = document.getElementById("bookingForm");
+      const addRoomForm = document.getElementById("addRoomForm");
+      const roomSelect = document.getElementById("roomSelect");
+      const roomPriceDisplay = document.getElementById("roomPriceDisplay");
+      const submitBtn = document.getElementById("submitBtn");
 
-      // --- BOOKING LOGIC ---
-      form.addEventListener("submit", async (e) => {
+      // Feedback Elements
+      const searchFeedback = document.getElementById("searchFeedback");
+      const statusMessage = document.getElementById("statusMessage");
+      const suggestionBox = document.getElementById("suggestionBox");
+      const suggestionText = document.getElementById("suggestionText");
+      const suggestionBtn = document.getElementById("suggestionBtn");
+
+      // Variables for Flatpickr instances
+      let checkinPicker, checkoutPicker;
+
+      // ==========================================
+      // INITIALIZATION & DATE PICKERS
+      // ==========================================
+      document.addEventListener("DOMContentLoaded", () => {
+        initDatePickers();
+
+        // Filter listener
+        document
+          .getElementById("bookingFilter")
+          .addEventListener("change", loadBookings);
+
+        // We DO NOT load rooms immediately anymore. We wait for input.
+        document
+          .getElementById("guests")
+          .addEventListener("input", handleSearchTrigger);
+
+        // Initial UI State
+        updateStatus(
+          "Kérem töltse ki a dátumokat és a vendégek számát a szobák megtekintéséhez.",
+          "info",
+        );
+      });
+
+      function initDatePickers() {
+        // Initialize Check-in Picker
+        checkinPicker = flatpickr("#checkin", {
+          minDate: "today",
+          dateFormat: "Y-m-d",
+          onChange: function (selectedDates, dateStr) {
+            // When checkin changes, update checkout minDate
+            checkoutPicker.set("minDate", dateStr);
+            handleSearchTrigger();
+          },
+        });
+
+        // Initialize Check-out Picker
+        checkoutPicker = flatpickr("#checkout", {
+          minDate: "today",
+          dateFormat: "Y-m-d",
+          onChange: function (selectedDates, dateStr) {
+            handleSearchTrigger();
+          },
+        });
+      }
+
+      // Debounce helper to prevent too many API calls while typing
+      let timeout = null;
+      function handleSearchTrigger() {
+        clearTimeout(timeout);
+        timeout = setTimeout(searchAvailableRooms, 500); // Wait 500ms after user stops typing/selecting
+      }
+
+      // ==========================================
+      // CORE LOGIC: SEARCH & FILTER
+      // ==========================================
+
+      async function searchAvailableRooms() {
+        const checkin = document.getElementById("checkin").value;
+        const checkout = document.getElementById("checkout").value;
+        const guests = parseInt(document.getElementById("guests").value);
+
+        // Reset UI before search
+        suggestionBox.style.display = "none";
+        roomSelect.innerHTML = "<option selected>Keresés...</option>";
+        roomSelect.disabled = true;
+        submitBtn.disabled = true;
+        roomPriceDisplay.textContent = "";
+
+        // Validation: Do we have all 3 inputs?
+        if (!checkin || !checkout || !guests) {
+          // Not ready yet
+          roomSelect.innerHTML =
+            '<option value="" selected>Először válasszon dátumot és vendégszámot...</option>';
+          updateStatus(
+            "Kérem töltse ki a dátumokat és a vendégek számát a szobák megtekintéséhez.",
+            "info",
+          );
+          return;
+        }
+
+        // Validation: Logic check
+        if (checkin >= checkout) {
+          updateStatus(
+            "A távozás dátuma nem lehet korábbi vagy azonos, mint az érkezésé.",
+            "error",
+          );
+          roomSelect.innerHTML =
+            '<option value="" selected>Hibás dátumok</option>';
+          return;
+        }
+
+        // Show loading
+        searchFeedback.style.display = "inline-block";
+        updateStatus("Szabad szobák keresése...", "info");
+
+        try {
+          // 1. Get ALL rooms
+          const { data: rooms, error: roomsError } = await supabaseClient
+            .from("rooms")
+            .select("*")
+            .order("price", { ascending: true }); // Sort by price to show cheapest first
+
+          if (roomsError) throw roomsError;
+
+          // 2. Get BOOKED rooms for these dates
+          const { data: bookings, error: bookingsError } = await supabaseClient
+            .from("bookings")
+            .select("room_number")
+            .lt("checkin", checkout)
+            .gt("checkout", checkin);
+
+          if (bookingsError) throw bookingsError;
+
+          const bookedRoomNumbers = bookings
+            ? bookings.map((b) => b.room_number)
+            : [];
+
+          // 3. Filter for exact match or bigger
+          const exactOrBiggerRooms = rooms.filter((room) => {
+            return (
+              !bookedRoomNumbers.includes(room.room_number) &&
+              room.capacity >= guests
+            );
+          });
+
+          // 4. Separate "Exact Fits" from "Upgrades"
+          const exactFits = exactOrBiggerRooms.filter(
+            (r) => r.capacity === guests,
+          );
+          const upgrades = exactOrBiggerRooms.filter(
+            (r) => r.capacity > guests,
+          );
+
+          populateRoomDropdown(exactFits, upgrades, guests);
+        } catch (err) {
+          console.error(err);
+          updateStatus(
+            "Hiba történt a keresés során. Kérjük próbálja újra.",
+            "error",
+          );
+          roomSelect.innerHTML =
+            '<option value="" selected>Hiba történt</option>';
+        } finally {
+          searchFeedback.style.display = "none";
+        }
+      }
+
+      function populateRoomDropdown(exactFits, upgrades, guests) {
+        roomSelect.innerHTML = ""; // Clear "Searching..."
+
+        // Case A: We have perfect matches
+        if (exactFits.length > 0) {
+          exactFits.forEach((room) => {
+            const option = document.createElement("option");
+            option.value = room.room_number;
+            option.text = `${room.room_number} - ${room.room_type} (${room.capacity} fő) - ${room.price} EUR`;
+            option.dataset.price = room.price;
+            roomSelect.appendChild(option);
+          });
+
+          roomSelect.disabled = false;
+          submitBtn.disabled = true; // Reset
+
+          // FIX: AUTO-SELECT IF ONLY 1 ROOM
+          if (exactFits.length === 1) {
+            roomSelect.selectedIndex = 0;
+            // Manually trigger change event to show price and enable button
+            roomSelect.dispatchEvent(new Event("change", { bubbles: true }));
+          }
+
+          updateStatus(
+            `${exactFits.length} szoba elérhető a megadott kritériumok alapján.`,
+            "success",
+          );
+          return;
+        }
+
+        // Case B: No perfect fits, but we have upgrades
+        if (upgrades.length > 0) {
+          upgrades.sort((a, b) => a.capacity - b.capacity);
+
+          // Show suggestion
+          showSuggestion(upgrades[0], guests);
+
+          updateStatus(
+            `Nincs pontosan ${guests} fős szoba szabad, de találtunk nagyobbat.`,
+            "warning",
+          );
+
+          upgrades.forEach((room) => {
+            const option = document.createElement("option");
+            option.value = room.room_number;
+            option.text = `${room.room_number} - ${room.room_type} (${room.capacity} fő) - ${room.price} EUR`;
+            option.dataset.price = room.price;
+            roomSelect.appendChild(option);
+          });
+
+          roomSelect.disabled = false;
+
+          // FIX: AUTO-SELECT IF ONLY 1 UPGRADE
+          if (upgrades.length === 1) {
+            roomSelect.selectedIndex = 0;
+            roomSelect.dispatchEvent(new Event("change", { bubbles: true }));
+          }
+
+          return;
+        }
+
+        // Case C: Nothing available at all
+        roomSelect.innerHTML =
+          '<option value="" disabled selected>Nincs elérhető szoba</option>';
+        updateStatus(
+          "Sajnos nincs szabad szoba ebben az időszakban ekkora létszámra.",
+          "error",
+        );
+        roomSelect.disabled = true;
+      }
+
+      function showSuggestion(room, guests) {
+        suggestionText.innerHTML = `
+          Nincs szabad szoba pontosan <strong>${guests} főre</strong>. <br>
+          Viszont a <strong>${room.room_number}. számú szoba</strong> (${room.capacity} fő) szabad ebben az időszakban.
+        `;
+
+        suggestionBtn.onclick = () => {
+          roomSelect.value = room.room_number;
+          roomSelect.dispatchEvent(new Event("change"));
+          suggestionBox.style.display = "none";
+          roomSelect.scrollIntoView({ behavior: "smooth", block: "center" });
+        };
+
+        suggestionBox.style.display = "block";
+      }
+
+      function updateStatus(msg, type) {
+        statusMessage.textContent = msg;
+        statusMessage.className = "status-message " + type;
+        statusMessage.style.display = "block";
+      }
+
+      // Handle Room Selection
+      roomSelect.addEventListener("change", (e) => {
+        const selectedOption = e.target.options[e.target.selectedIndex];
+        const price = selectedOption.dataset.price;
+
+        if (price) {
+          roomPriceDisplay.textContent = `Kiválasztott szoba ára: ${price} EUR / éjszaka`;
+          submitBtn.disabled = false; // ENABLE BUTTON
+          suggestionBox.style.display = "none";
+        } else {
+          roomPriceDisplay.textContent = "";
+          submitBtn.disabled = true;
+        }
+      });
+
+      // ==========================================
+      // ROOMS LOGIC (DATABASE)
+      // ==========================================
+      async function loadAdminRooms() {
+        const tbody = document.getElementById("roomsTableBody");
+        tbody.innerHTML = "";
+
+        const { data, error } = await supabaseClient
+          .from("rooms")
+          .select("*")
+          .order("room_number", { ascending: true });
+
+        if (error) {
+          console.error("Load admin rooms error:", error);
+          return;
+        }
+
+        if (!data || data.length === 0) {
+          document.getElementById("noRooms").classList.remove("hidden");
+          return;
+        } else {
+          document.getElementById("noRooms").classList.add("hidden");
+        }
+
+        data.forEach((room) => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td><strong>${room.room_number}</strong></td>
+            <td>${room.room_type}</td>
+            <td>${room.capacity} fő</td>
+            <td>${room.price} EUR</td>
+            <td>${new Date(room.created_at).toLocaleDateString()}</td>
+            <td>
+              <button class="btn-delete" onclick="deleteRoom('${room.room_number}')">
+                🗑️ Törlés
+              </button>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+      }
+
+      async function deleteRoom(roomNumber) {
+        const confirmDelete = confirm(
+          `Biztosan ki akarod törölni a(z) ${roomNumber} számú szobát? Ez művelet nem visszavonható.`,
+        );
+        if (!confirmDelete) return;
+
+        const { error } = await supabaseClient
+          .from("rooms")
+          .delete()
+          .eq("room_number", roomNumber);
+
+        if (error) {
+          alert("Hiba a törléskor: " + error.message);
+        } else {
+          // Refresh table
+          loadAdminRooms();
+        }
+      }
+
+      addRoomForm.addEventListener("submit", async (e) => {
         e.preventDefault();
-
-        const btn = form.querySelector("button");
+        const btn = addRoomForm.querySelector('button[type="submit"]');
         const originalText = btn.innerText;
-        btn.innerText = "Mentés folyamatban...";
+        btn.innerText = "Mentés...";
         btn.disabled = true;
 
-        const formData = new FormData(form);
+        const newRoom = {
+          room_number: document.getElementById("newRoomNumber").value,
+          room_type: document.getElementById("newRoomType").value,
+          capacity: parseInt(document.getElementById("newRoomCapacity").value),
+          price: parseFloat(document.getElementById("newRoomPrice").value),
+        };
 
+        const { error } = await supabaseClient.from("rooms").insert([newRoom]);
+
+        if (error) {
+          alert("Hiba a szoba hozzáadásakor: " + error.message);
+        } else {
+          alert("Szoba sikeresen hozzáadva!");
+          addRoomForm.reset();
+          loadAdminRooms();
+        }
+
+        btn.innerText = originalText;
+        btn.disabled = false;
+      });
+
+      // ==========================================
+      // BOOKING LOGIC
+      // ==========================================
+      bookingForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const btn = bookingForm.querySelector('button[type="submit"]');
+        const originalText = btn.innerText;
+        btn.innerText = "Feldolgozás...";
+        btn.disabled = true;
+
+        const formData = new FormData(bookingForm);
+        const selectedRoom = roomSelect.value;
+
+        const checkin = formData.get("checkin");
+        const checkout = formData.get("checkout");
+
+        if (!selectedRoom) {
+          alert("Kérjük válasszon szobát!");
+          btn.disabled = false;
+          btn.innerText = originalText;
+          return;
+        }
+
+        // 🔴 STEP 1: Check for overlapping bookings (Security Check)
+        const { data: existingBookings, error: checkError } =
+          await supabaseClient
+            .from("bookings")
+            .select("*")
+            .eq("room_number", selectedRoom)
+            .lt("checkin", checkout)
+            .gt("checkout", checkin);
+
+        if (checkError) {
+          console.error("Check error:", checkError);
+          alert("Hiba az ellenőrzés során!");
+          btn.disabled = false;
+          btn.innerText = originalText;
+          return;
+        }
+
+        if (existingBookings && existingBookings.length > 0) {
+          alert(
+            "Ez a szoba sajnos időközben foglalt lett. Kérjük válasszon másikat.",
+          );
+          btn.disabled = false;
+          btn.innerText = originalText;
+          searchAvailableRooms();
+          return;
+        }
+
+        // ✅ STEP 2: Insert booking if safe
         const bookingData = {
           name: formData.get("name"),
           email: formData.get("email"),
           phone: formData.get("phone"),
-          checkin: formData.get("checkin"),
-          checkout: formData.get("checkout"),
+          checkin,
+          checkout,
           guests: parseInt(formData.get("guests")),
+          room_number: selectedRoom,
         };
 
-        try {
-          // Insert to Supabase using supabaseClient
-          const { error } = await supabaseClient
-            .from("bookings")
-            .insert([bookingData]);
+        const { error } = await supabaseClient
+          .from("bookings")
+          .insert([bookingData]);
 
-          if (error) throw error;
-
-          // Success UI
-          form.classList.add("hidden");
-          document.getElementById("successMsg").classList.remove("hidden");
-          form.reset();
-        } catch (err) {
-          console.error("Hiba:", err);
-          alert("Hiba történt a mentés közben. Ellenőrizze a konzolt (F12).");
-        } finally {
-          btn.innerText = originalText;
+        if (error) {
+          console.error("Booking Error:", error);
+          alert("Hiba történt: " + error.message);
           btn.disabled = false;
+          btn.innerText = originalText;
+        } else {
+          bookingForm.classList.add("hidden");
+          document.getElementById("successMsg").classList.remove("hidden");
+          bookingForm.reset();
+          roomPriceDisplay.textContent = "";
+          checkinPicker.clear();
+          checkoutPicker.clear();
+          suggestionBox.style.display = "none";
+          roomSelect.innerHTML =
+            '<option value="" selected>Először válasszon dátumot és vendégszámot...</option>';
+          roomSelect.disabled = true;
+          updateStatus(
+            "Foglalás kész. Új foglaláshoz töltse ki az adatokat.",
+            "info",
+          );
         }
+
+        btn.innerText = originalText;
+        btn.disabled = false;
       });
 
       function resetForm() {
-        form.reset();
-        form.classList.remove("hidden");
+        bookingForm.reset();
+        bookingForm.classList.remove("hidden");
         document.getElementById("successMsg").classList.add("hidden");
+        roomPriceDisplay.textContent = "";
+        checkinPicker.clear();
+        checkoutPicker.clear();
+        searchAvailableRooms();
       }
 
-      // --- ADMIN LOGIC ---
+      // Prefill helper from Showcase section
+      function prefillRoom(type) {
+        document.getElementById("guests").focus();
+      }
+
+      // ==========================================
+      // ADMIN UI LOGIC
+      // ==========================================
       function loginAdmin() {
         const code = document.getElementById("adminCode").value;
         if (code === ADMIN_CODE) {
-          adminLogin.style.display = "none";
-          adminPanel.style.display = "block";
+          document.getElementById("adminLogin").style.display = "none";
+          document.getElementById("adminPanel").style.display = "block";
           loadBookings();
+          loadAdminRooms();
         } else {
           alert("Hibás kód!");
         }
       }
 
       function logoutAdmin() {
-        adminPanel.style.display = "none";
-        adminLogin.style.display = "block";
+        document.getElementById("adminPanel").style.display = "none";
+        document.getElementById("adminLogin").style.display = "block";
         document.getElementById("adminCode").value = "";
       }
 
+      function switchTab(tabName) {
+        document.getElementById("tab-bookings").classList.add("hidden");
+        document.getElementById("tab-rooms").classList.add("hidden");
+        document
+          .querySelectorAll(".tab-btn")
+          .forEach((btn) => btn.classList.remove("active"));
+
+        document.getElementById(`tab-${tabName}`).classList.remove("hidden");
+
+        const buttons = document.querySelectorAll(".tab-btn");
+        if (tabName === "bookings") buttons[0].classList.add("active");
+        if (tabName === "rooms") buttons[1].classList.add("active");
+      }
+
+      // ==========================================
+      // UPDATED: Booking Status Logic
+      // ==========================================
+      function getBookingStatus(checkin, checkout) {
+        // Helper to get YYYY-MM-DD string for accurate comparison
+        const formatDate = (dateStr) =>
+          new Date(dateStr).toISOString().split("T")[0];
+        const todayStr = new Date().toISOString().split("T")[0];
+
+        const cIn = formatDate(checkin);
+        const cOut = formatDate(checkout);
+
+        // Logic Hierarchy:
+        // 1. Ma érkeznek (Arriving Today): checkin == today (and checkout is later)
+        // 2. Ma távoznak (Departing Today): checkout == today (includes same-day stays)
+        // 3. Jelenlegi (Current): checkin < today AND checkout > today
+        // 4. Múltbeli (Past): checkout < today
+        // 5. Jövőbeli (Future): checkin > today
+
+        if (cIn === todayStr && cOut > todayStr) {
+          return { class: "status-arriving", label: "Ma érkeznek", order: 1 };
+        }
+        if (cOut === todayStr) {
+          // Includes same-day check-in/out
+          return { class: "status-departing", label: "Ma távoznak", order: 3 };
+        }
+        if (cIn < todayStr && cOut > todayStr) {
+          return { class: "status-active", label: "Jelenlegi", order: 2 };
+        }
+        if (cOut < todayStr) {
+          return { class: "status-past", label: "Múltbeli", order: 4 };
+        }
+        if (cIn > todayStr) {
+          return { class: "status-upcoming", label: "Jövőbeli", order: 5 };
+        }
+
+        // Fallback
+        return { class: "status-past", label: "Ismeretlen", order: 99 };
+      }
+
       async function loadBookings() {
-        tableBody.innerHTML = "";
+        const tbody = document.getElementById("bookingsTableBody");
+        tbody.innerHTML = "";
 
-        try {
-          // Select from Supabase using supabaseClient
-          const { data, error } = await supabaseClient
-            .from("bookings")
-            .select("*")
-            .order("created_at", { ascending: false });
+        const filterValue = document.getElementById("bookingFilter").value;
 
-          if (error) throw error;
+        // MUST select id to allow deletion
+        const { data, error } = await supabaseClient
+          .from("bookings")
+          .select("*")
+          .order("created_at", { ascending: false });
 
-          if (!data || data.length === 0) {
-            document.getElementById("noData").classList.remove("hidden");
-            return;
-          }
+        if (error) {
+          console.error("Error loading bookings:", error);
+          return;
+        }
 
-          data.forEach((row) => {
-            const tr = document.createElement("tr");
-            const date = row.created_at
-              ? new Date(row.created_at).toLocaleDateString()
-              : "-";
-            tr.innerHTML = `
-              <td>${date}</td>
-              <td><strong>${row.name}</strong></td>
-              <td>${row.email}</td>
-              <td>${row.phone || "-"}</td>
-              <td>${row.checkin}</td>
-              <td>${row.checkout}</td>
-              <td>${row.guests}</td>
-            `;
-            tableBody.appendChild(tr);
-          });
-        } catch (err) {
-          console.error("Load error:", err);
-          alert("Nem sikerült betölteni az adatokat.");
+        if (!data || data.length === 0) {
+          document.getElementById("noBookings").classList.remove("hidden");
+          return;
+        } else {
+          document.getElementById("noBookings").classList.add("hidden");
+        }
+
+        // 1. Enrich data with status
+        const enrichedBookings = data.map((row) => {
+          const status = getBookingStatus(row.checkin, row.checkout);
+          return {
+            ...row,
+            statusLabel: status.label,
+            statusClass: status.class,
+            sortOrder: status.order,
+          };
+        });
+
+        // 2. Sort by status order (Arriving -> Current -> Departing -> Past -> Future)
+        enrichedBookings.sort((a, b) => {
+          return a.sortOrder - b.sortOrder;
+        });
+
+        // 3. Filter if a specific filter is selected
+        const displayBookings =
+          filterValue === "Mind"
+            ? enrichedBookings
+            : enrichedBookings.filter((b) => b.statusLabel === filterValue);
+
+        if (displayBookings.length === 0) {
+          document.getElementById("noBookings").classList.remove("hidden");
+          document.getElementById("noBookings").innerText =
+            "Nincsenek megfelelő foglalások.";
+          return;
+        } else {
+          document.getElementById("noBookings").classList.add("hidden");
+        }
+
+        // 4. Render
+        displayBookings.forEach((row) => {
+          const date = row.created_at
+            ? new Date(row.created_at).toLocaleDateString()
+            : "-";
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td>${date}</td>
+            <td><span style="background:var(--gold); color:black; padding:2px 8px; border-radius:4px; font-size:0.8rem; font-weight:bold;">${row.room_number || "N/A"}</span></td>
+            <td><strong>${row.name}</strong></td>
+            <td>${row.email}</td>
+            <td>${row.checkin}</td>
+            <td>${row.checkout}</td>
+            <td>${row.guests}</td>
+            <td><span class="status-badge ${row.statusClass}">${row.statusLabel}</span></td>
+            <td>
+              <button class="btn-delete" onclick="deleteBooking(${row.id})">
+                🗑️ Törlés
+              </button>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+      }
+
+      async function deleteBooking(id) {
+        const confirmDelete = confirm(
+          "Biztosan ki akarod törölni ezt a foglalást? Ez művelet nem visszavonható.",
+        );
+        if (!confirmDelete) return;
+
+        const { error } = await supabaseClient
+          .from("bookings")
+          .delete()
+          .eq("id", id);
+
+        if (error) {
+          alert("Hiba a törléskor: " + error.message);
+        } else {
+          // Refresh table
+          loadBookings();
         }
       }
 
       // Mobile Menu
       function toggleMenu() {
         const nav = document.querySelector(".nav-links");
-        nav.style.display = nav.style.display === "flex" ? "none" : "flex";
-        if (nav.style.display === "flex") {
+        const isVisible = nav.style.display === "flex";
+        nav.style.display = isVisible ? "none" : "flex";
+
+        if (!isVisible) {
           nav.style.flexDirection = "column";
           nav.style.position = "absolute";
           nav.style.top = "70px";
           nav.style.right = "0";
           nav.style.background = "white";
           nav.style.width = "100%";
-          nav.style.padding = "1rem";
+          nav.style.padding = "2rem";
           nav.style.boxShadow = "0 5px 10px rgba(0,0,0,0.1)";
+        } else {
+          nav.style.boxShadow = "none";
         }
       }
     </script>
